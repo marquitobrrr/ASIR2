@@ -21,6 +21,7 @@
 - **pedunculo** (BOOLEAN, NOT NULL): Indica si el caqui tiene pedúnculo (1) o no (0).
 - **tiempo_maduracion** (INTEGER, NOT NULL): Tiempo de maduración en días.
 
+![cap1](https://github.com/user-attachments/assets/d38c184d-abc2-4a7c-a54a-f34450c2e5b7)
 
 ---
 
@@ -73,6 +74,7 @@ CREATE TABLE Caquis (
 ---
 
 ## Tamaño y Crecimiento de la Base de Datos
+![cap2](https://github.com/user-attachments/assets/07ea77b2-21f3-4e54-81f9-4e2262964449)
 
 El tamaño de una base de datos SQLite aumenta al:
 
@@ -88,6 +90,8 @@ Realizar vistas e índices para evitar crecimiento innecesario y compactar la ba
 ## Optimización del Rendimiento y Mantenimiento
 
 Se han encontrado varias consultas repetitivas en la tabla Mandarinas sin filtros específicos y consultas sobre `fecha_recogida` en rangos de fechas. Para optimizar esto, se sugieren los siguientes índices:
+![cap3](https://github.com/user-attachments/assets/bc2c6802-ddc0-411c-8e9d-f46095865beb)
+![cap4](https://github.com/user-attachments/assets/e86e8d99-b985-4ef3-8636-a5f4645085f6)
 
 ### Índices
 
@@ -140,12 +144,14 @@ FROM Mandarinas;
 ## Copias de Seguridad y Restauración
 
 ### Realización de una copia de seguridad
+![cap6](https://github.com/user-attachments/assets/8d879048-b2ad-4995-be47-470fb72ca64f)
 
 ```bash
 .backup 'frutitas_bonitas_bonitas.db'
 ```
 
 ### Restauración desde la copia de seguridad
+![cap7](https://github.com/user-attachments/assets/ff470586-e41a-4ef1-8741-6d71beade066)
 
 ```bash
 .restore 'frutitas_bonitas_bonitas.db'
@@ -154,6 +160,9 @@ FROM Mandarinas;
 ---
 
 ## Automatización de Backups
+![cap8](https://github.com/user-attachments/assets/72cb2200-f95a-48a1-8c22-f5e9b3d326d5)
+
+![cap9](https://github.com/user-attachments/assets/b4407882-fd36-4412-8a37-7bc4c45ba128)
 
 Script para realizar un backup automático diariamente a las 23:59:59:
 
@@ -174,6 +183,7 @@ echo "Backup realizado: $BACKUP_NAME"
 ```
 
 Crontab para ejecutar el script automáticamente:
+![cap10](https://github.com/user-attachments/assets/5897a863-a968-4193-980c-beda97457e65)
 
 ```bash
 59 23 * * * /bin/bash /home/alumno/scripts/backup_frutitas.sh
