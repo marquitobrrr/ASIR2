@@ -90,3 +90,23 @@ Al seleccionar un SAI, es fundamental considerar no solo la capacidad de VA, sin
      ```
      upsc simups@localhost
 ![cap5](https://github.com/user-attachments/assets/dc84f74b-45e7-416f-a466-326d50c3dc00)
+
+## Parte 2: Monitorización de eventos con Kibana
+
+1. **Instalar Kibana.**
+
+2. **Configurar NUT para enviar logs.**
+   - NUT registra eventos críticos, como batería baja o fallos de alimentación, en el archivo de log del sistema. Estos logs pueden enviarse a Kibana para su análisis. Asegúrate de que rsyslog esté configurado para enviar los logs al puerto adecuado de Kibana.
+
+3. **Crear filtros y dashboards en Kibana para analizar y visualizar los logs generados por NUT.**
+   - Configura Kibana para analizar y visualizar los logs generados por NUT, tales como:
+     - Estado de la batería.
+     - Tiempo de respaldo.
+     - Eventos críticos como sobrecarga o fallo de alimentación.
+   - Crea un dashboard que muestre visualmente los eventos más relevantes, como las caídas de energía o la activación del modo batería.
+
+4. **Simulación de eventos críticos.**
+   - Cambia los parámetros en el archivo de configuración de NUT (`ups.conf`) para simular eventos como batería baja o fallo de alimentación:
+     - `ups.status = OB LB` # Modo batería, baja carga
+     - `battery.charge = 10` # Simula un 10% de batería restante
+   - Reinicia NUT y verifica cómo se registran los eventos en Kibana. Estos eventos deberán aparecer como logs críticos, que pueden generar alertas si están configuradas.
