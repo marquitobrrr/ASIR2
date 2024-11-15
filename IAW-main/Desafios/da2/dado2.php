@@ -1,5 +1,5 @@
 <?php
-// Recibiendo los parámetros desde la página anterior
+// Recibiendo los parámetros desde dado1.php
 $numDados = isset($_GET['numDados']) ? $_GET['numDados'] : 1;
 $caras = isset($_GET['caras']) ? $_GET['caras'] : 6;
 $puntosOponente = isset($_GET['puntosOponente']) ? $_GET['puntosOponente'] : 0;
@@ -83,7 +83,7 @@ $sumaResultados = array_sum($resultados);
             <p class="draw">Es un empate.</p>
         <?php endif; ?>
 
-        <p><a href="index.php">Volver a jugar</a></p>
+        <p><a href="dado1.php">Volver a jugar</a></p>
     </div>
 
 </body>

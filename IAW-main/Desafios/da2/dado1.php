@@ -59,12 +59,6 @@
         button:hover {
             background-color: #0056b3;
         }
-
-        .form-container p {
-            text-align: center;
-            color: #666;
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
@@ -72,7 +66,7 @@
     <h1>DADOS</h1>
 
     <div class="form-container">
-        <form action="resultado.php" method="GET">
+        <form action="dado2.php" method="GET">
             <label for="numDados">Número de Dados:</label>
             <select name="numDados" id="numDados">
                 <option value="1">1</option>
