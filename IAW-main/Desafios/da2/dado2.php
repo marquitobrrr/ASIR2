@@ -43,46 +43,82 @@ $sumaResultados = array_sum($resultados);
             text-align: center;
         }
 
-        /* Estilo del dado */
+        /* Estilo base del dado */
         .dado {
-            width: 100px;
-            height: 100px;
             display: inline-block;
-            background-color: #ffffff;
-            border: 2px solid #333;
-            border-radius: 10px;
-            position: relative;
             margin: 10px;
-        }
-
-        /* Para dado de 6 caras */
-        .cara {
-            font-size: 40px;
+            padding: 20px;
+            font-size: 30px;
             font-weight: bold;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
         }
 
-        /* Personalizar los dados según el número de caras */
-        .cara-4 .cara {
-            font-size: 30px;
+        /* Dado de 4 caras */
+        .dado-4 {
+            background-color: #007BFF;
+            border-radius: 15px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: rotate(45deg); /* Simula una pirámide en 2D */
         }
-        .cara-6 .cara {
-            font-size: 40px;
+
+        /* Dado de 6 caras */
+        .dado-6 {
+            background-color: #28a745;
+            border-radius: 15px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .cara-8 .cara {
-            font-size: 30px;
+
+        /* Dado de 8 caras */
+        .dado-8 {
+            background-color: #ffc107;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); /* Octágono */
         }
-        .cara-10 .cara {
-            font-size: 30px;
+
+        /* Dado de 10 caras */
+        .dado-10 {
+            background-color: #dc3545;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            clip-path: polygon(50% 0%, 100% 10%, 100% 90%, 50% 100%, 0% 90%, 0% 10%); /* Decágono */
         }
-        .cara-12 .cara {
-            font-size: 25px;
+
+        /* Dado de 12 caras */
+        .dado-12 {
+            background-color: #17a2b8;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            clip-path: polygon(50% 0%, 100% 8%, 100% 92%, 50% 100%, 0% 92%, 0% 8%); /* 12-gon */
         }
-        .cara-20 .cara {
-            font-size: 20px;
+
+        /* Dado de 20 caras */
+        .dado-20 {
+            background-color: #6610f2;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            clip-path: polygon(50% 0%, 100% 5%, 100% 95%, 50% 100%, 0% 95%, 0% 5%); /* icoságono */
         }
 
         .result {
@@ -124,8 +160,8 @@ $sumaResultados = array_sum($resultados);
         <p><strong>Dados lanzados:</strong></p>
         <div class="dados">
             <?php foreach ($resultados as $resultado): ?>
-                <div class="dado cara-<?php echo $caras; ?>">
-                    <div class="cara"><?php echo $resultado; ?></div>
+                <div class="dado dado-<?php echo $caras; ?>">
+                    <div class="numero"><?php echo $resultado; ?></div>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -146,4 +182,3 @@ $sumaResultados = array_sum($resultados);
 
 </body>
 </html>
-
