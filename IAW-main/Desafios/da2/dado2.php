@@ -43,14 +43,46 @@ $sumaResultados = array_sum($resultados);
             text-align: center;
         }
 
+        /* Estilo del dado */
         .dado {
+            width: 100px;
+            height: 100px;
             display: inline-block;
+            background-color: #ffffff;
+            border: 2px solid #333;
+            border-radius: 10px;
+            position: relative;
             margin: 10px;
         }
 
-        .dado img {
-            width: 50px;
-            height: 50px;
+        /* Para dado de 6 caras */
+        .cara {
+            font-size: 40px;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Personalizar los dados según el número de caras */
+        .cara-4 .cara {
+            font-size: 30px;
+        }
+        .cara-6 .cara {
+            font-size: 40px;
+        }
+        .cara-8 .cara {
+            font-size: 30px;
+        }
+        .cara-10 .cara {
+            font-size: 30px;
+        }
+        .cara-12 .cara {
+            font-size: 25px;
+        }
+        .cara-20 .cara {
+            font-size: 20px;
         }
 
         .result {
@@ -92,8 +124,8 @@ $sumaResultados = array_sum($resultados);
         <p><strong>Dados lanzados:</strong></p>
         <div class="dados">
             <?php foreach ($resultados as $resultado): ?>
-                <div class="dado">
-                    <img src="imagenes/dado<?php echo $resultado; ?>.png" alt="Dado <?php echo $resultado; ?>">
+                <div class="dado cara-<?php echo $caras; ?>">
+                    <div class="cara"><?php echo $resultado; ?></div>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -114,3 +146,4 @@ $sumaResultados = array_sum($resultados);
 
 </body>
 </html>
+
