@@ -72,7 +72,7 @@
     <h1>DADOS</h1>
 
     <div class="form-container">
-        <form action="" method="POST">
+        <form action="resultado.php" method="GET">
             <label for="numDados">Número de Dados:</label>
             <select name="numDados" id="numDados">
                 <option value="1">1</option>
@@ -95,10 +95,7 @@
 
             <button type="submit" name="submit">Lanzar Dados</button>
         </form>
-
-        <p>Selecciona los parámetros y haz clic en "Lanzar Dados".</p>
     </div>
 
 </body>
 </html>
-
