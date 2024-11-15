@@ -55,6 +55,7 @@ $sumaResultados = array_sum($resultados);
             transform-style: preserve-3d;
             transform: rotateX(30deg) rotateY(45deg);
             margin: 0 auto; /* Centrar el dado */
+            margin-bottom: 20px; /* Espacio entre los dados */
         }
 
         .cara {
@@ -82,21 +83,31 @@ $sumaResultados = array_sum($resultados);
         /* Ajuste del dado según el número de caras */
         .dado-4 {
             transform: scale(0.6);
+            width: 80px;
+            height: 80px;
         }
         .dado-6 {
             transform: scale(1);
         }
         .dado-8 {
             transform: scale(0.8);
+            width: 90px;
+            height: 90px;
         }
         .dado-10 {
             transform: scale(0.7);
+            width: 90px;
+            height: 90px;
         }
         .dado-12 {
             transform: scale(0.9);
+            width: 95px;
+            height: 95px;
         }
         .dado-20 {
             transform: scale(1.1);
+            width: 110px;
+            height: 110px;
         }
 
         .result {
