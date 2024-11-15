@@ -25,6 +25,11 @@ $sumaResultados = array_sum($resultados);
             background-color: #f4f4f4;
             margin: 0;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
         }
 
         h1 {
@@ -39,7 +44,6 @@ $sumaResultados = array_sum($resultados);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 600px;
-            margin: 0 auto;
             text-align: center;
         }
 
@@ -50,7 +54,7 @@ $sumaResultados = array_sum($resultados);
             position: relative;
             transform-style: preserve-3d;
             transform: rotateX(30deg) rotateY(45deg);
-            animation: rotateDice 2s infinite ease-in-out;
+            margin: 0 auto; /* Centrar el dado */
         }
 
         .cara {
@@ -74,13 +78,6 @@ $sumaResultados = array_sum($resultados);
         .cara-4  { transform: rotateY(270deg) translateZ(50px); }
         .cara-5  { transform: rotateX( 90deg) translateZ(50px); }
         .cara-6  { transform: rotateX(-90deg) translateZ(50px); }
-
-        /* Animación de rotación del dado */
-        @keyframes rotateDice {
-            0% { transform: rotateX(30deg) rotateY(45deg); }
-            50% { transform: rotateX(30deg) rotateY(225deg); }
-            100% { transform: rotateX(30deg) rotateY(45deg); }
-        }
 
         /* Ajuste del dado según el número de caras */
         .dado-4 {
