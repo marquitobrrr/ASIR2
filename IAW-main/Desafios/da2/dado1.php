@@ -68,24 +68,23 @@
     <div class="form-container">
         <form action="dado2.php" method="GET">
             <label for="numDados">Número de Dados:</label>
-            <select name="numDados" id="numDados">
+            <select name="numDados" id="numDados" required>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
             </select>
 
             <label for="caras">Número de Caras:</label>
-            <select name="caras" id="caras">
+            <select name="caras" id="caras" required>
                 <option value="4">4</option>
                 <option value="6">6</option>
                 <option value="8">8</option>
-                <option value="10">10</option>
                 <option value="12">12</option>
                 <option value="20">20</option>
             </select>
 
             <label for="puntosOponente">Puntos Oponente:</label>
-            <input type="number" name="puntosOponente" id="puntosOponente" required>
+            <input type="number" name="puntosOponente" id="puntosOponente" required min="0">
 
             <button type="submit" name="submit">Lanzar Dados</button>
         </form>
