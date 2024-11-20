@@ -1,4 +1,5 @@
 # PostgreSQL: Gestión de Información de Equitación en la DB EquitacionSuave
+![a](https://github.com/user-attachments/assets/a7b79a85-eac2-4e63-8afd-24adfba8f1af)
 
 ## Finalidad:
 Se va a trabajar con comandos SQL para instalar PostgreSQL, crear tablas, gestionar usuarios, insertar y modificar datos, y utilizar pgAdmin para la administración visual.
@@ -97,8 +98,10 @@ Se va a trabajar con comandos SQL para instalar PostgreSQL, crear tablas, gestio
 
 ### Paso 1: Acceso a pgAdmin y conexión al servidor PostgreSQL
 
-1. Abre pgAdmin y conéctate al servidor PostgreSQL usando las credenciales de `postgres`.
-2. Verifica la conexión y accede a la lista de bases de datos.
+1. Abre pgAdmin.
+![cap13](https://github.com/user-attachments/assets/25e7bd52-320f-495c-b0b4-a418768e1319)
+3. Conéctate al servidor PostgreSQL usando las credenciales de `postgres`.
+4. Verifica la conexión y accede a la lista de bases de datos.
 
 ### Paso 2: Crear la base de datos `EquitacionSuave`
 
