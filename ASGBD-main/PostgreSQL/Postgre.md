@@ -106,20 +106,32 @@ Se va a trabajar con comandos SQL para instalar PostgreSQL, crear tablas, gestio
 ### Paso 2: Crear la base de datos `EquitacionSuave`
 
 1. En pgAdmin, crea la base de datos `EquitacionSuave` con `postgres` como propietario.
+![cap14](https://github.com/user-attachments/assets/93a9897d-332b-4f6a-85fe-834b6d392528)
 
 ### Paso 3: Crear las tablas `jinetes` y `caballos`
 
 1. En la sección **Schemas > public > Tables** de pgAdmin, crea la tabla `jinetes` con los campos mencionados en el paso 2.
 2. Crea también la tabla `caballos` con los campos requeridos y la referencia a la tabla `jinetes`.
 
+![cap15](https://github.com/user-attachments/assets/3f59ed68-7cfe-4610-a17f-85ea1b4e0b68)
+
+![cap16](https://github.com/user-attachments/assets/458cc8da-70a3-4c7f-abbb-d23d7ed0c2d3)
+
 ### Paso 4: Insertar y consultar datos
 
 1. Utiliza la herramienta de consulta (Query Tool) de pgAdmin para insertar y consultar datos en ambas tablas.
+
+   ![cap17](https://github.com/user-attachments/assets/4b21c8bd-e5a6-498d-922d-28ce0358b07f)
+
+![cap18](https://github.com/user-attachments/assets/4c0c54c1-04ac-4969-b5c0-ff270a198eae)
 
 ### Paso 5: Crear y administrar usuarios y roles en pgAdmin
 
 1. En **Login/Group Roles** de pgAdmin, crea los usuarios `admin_equitacion`, `user_consultas` y `user_lectura`.
 2. Asigna los permisos correspondientes a cada usuario en las tablas `jinetes` y `caballos` usando la interfaz gráfica de pgAdmin.
+   
+
+![capuser](https://github.com/user-attachments/assets/bb4725f5-1016-4802-b72b-a7544d362a92)
 
 ---
 
@@ -128,21 +140,24 @@ Se va a trabajar con comandos SQL para instalar PostgreSQL, crear tablas, gestio
 ### Ejercicio 1: Uso de JSON en la tabla `jinetes`
 
 1. Añade una columna llamada `detalles_competencias` de tipo JSON en la tabla `jinetes`.
-2. Inserta un nuevo registro en la tabla `jinetes` y utiliza la columna `detalles_competencias` para almacenar datos en formato JSON que incluyan las competencias y el número de victorias del jinete.
+   
+3. Inserta un nuevo registro en la tabla `jinetes` y utiliza la columna `detalles_competencias` para almacenar datos en formato JSON que incluyan las competencias y el número de victorias del jinete.
+
+![cap19](https://github.com/user-attachments/assets/496841e7-f049-4b0f-96f1-11bcf9edfcb0)
+
 
 ### Ejercicio 2: Uso de arreglos (ARRAYS) para certificaciones
 
 1. Añade una columna `certificaciones` de tipo ARRAY en la tabla `jinetes`.
 2. Actualiza uno de los registros en `jinetes` para almacenar múltiples certificaciones en la columna `certificaciones`.
+3. Crea una vista materializada llamada `vista_jinetes_avanzados` que contenga los registros de jinetes cuya categoría sea `Avanzado`.
+4. Realiza una operación para actualizar los datos de la vista materializada.
+ ![cap20](https://github.com/user-attachments/assets/6e04eaa6-77de-40d9-9370-78d73101ecc5)
 
-### Ejercicio 3: Creación de Vistas Materializadas
-
-1. Crea una vista materializada llamada `vista_jinetes_avanzados` que contenga los registros de jinetes cuya categoría sea `Avanzado`.
-2. Realiza una operación para actualizar los datos de la vista materializada.
-
-### Ejercicio 4: Herencia en Tablas para gestionar equipos de equitación
+### Ejercicio 3: Herencia en Tablas para gestionar equipos de equitación
 
 1. Crea una tabla base llamada `equipo_base` con los campos `id`, `nombre` y `tipo`.
 2. Crea una tabla heredada llamada `equipo_de_salto` que extienda `equipo_base` y añada un campo `altura_maxima` para especificar la altura máxima permitida del equipo.
 3. Inserta un registro en la tabla `equipo_de_salto`.
 
+![cap21](https://github.com/user-attachments/assets/cf622b52-187a-4eb9-94ed-f60d5466353d)
