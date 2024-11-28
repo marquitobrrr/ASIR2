@@ -33,19 +33,25 @@ A continuación se presentan las recomendaciones de SAI en rack para cada una de
    - **Modelo recomendado**: **SLC 3000 R** 
      - **Capacidad**: 3000 VA (disponible en versiones de mayor capacidad, como 4000 VA).
      - **Características**: SAI online de doble conversión, que proporciona un suministro de energía constante y protección contra interrupciones.
-![slc3000r](https://github.com/user-attachments/assets/6cba9480-6cbc-48ce-a59d-0e3c4c2c0093)
+       
+![slc3000r](https://github.com/user-attachments/assets/4e267f7e-d8d0-41ff-966c-4fdb23ddcfea)
+
 
 2. **CyberPower**:
    - **Modelo recomendado**: **CP1500PFCLCDR** (considerar el modelo en rack CP3000PFCLCD también).
      - **Capacidad**: 3000 VA (versión de rack).
      - **Características**: Tecnología de onda sinusoidal pura, puerto USB para monitoreo y gestión de energía, ideal para servidores y equipos críticos.
-![cp15000](https://github.com/user-attachments/assets/27784df1-b7c2-491e-a8e3-6269a048db4d)
+       
+![12296448](https://github.com/user-attachments/assets/01171d2f-c8c4-4fd8-8841-4fa1fa3b161c)
+
 
 3. **APC**:
    - **Modelo recomendado**: **APC Smart-UPS SRT 3000VA RM** 
      - **Capacidad**: 3000 VA (se puede considerar una versión de 5000 VA para mayor margen).
      - **Características**: SAI en rack con tecnología de doble conversión, ofrece conectividad para monitoreo y gestión, y está diseñado para proteger equipos de red, servidores y sistemas críticos.
-![apc](https://github.com/user-attachments/assets/9ac96327-7417-4062-9dc1-5f3f203d759b)
+     - 
+
+![apc](https://github.com/user-attachments/assets/8163be51-46e7-4b7e-9166-28a0ee46e22f)
 
 ---
 
@@ -57,9 +63,10 @@ Al seleccionar un SAI, es fundamental considerar no solo la capacidad de VA, sin
 # Parte 1: Configuración de NUT en modo simulado
 
 1. **Instalar NUT**.
+   
 ![cap1](https://github.com/user-attachments/assets/c8e634ac-bf82-4df2-ac79-c677b1c9a8b5)
 
-2. **Configurar NUT en modo simulado**:
+3. **Configurar NUT en modo simulado**:
    - Edita el archivo de configuración de NUT (/etc/nut/ups.conf) y configura un SAI simulado usando el driver dummy-ups.
    - Añade la siguiente configuración para simular un SAI:
           [simups]
@@ -73,7 +80,7 @@ Al seleccionar un SAI, es fundamental considerar no solo la capacidad de VA, sin
      
      ![cap2](https://github.com/user-attachments/assets/21dfa2c3-bad3-40bb-be94-9698c225ff43)
 
-3. **Configurar el servicio de NUT**:
+4. **Configurar el servicio de NUT**:
    - Edita el archivo /etc/nut/upsmon.conf para definir la monitorización del SAI:
           MONITOR simups@localhost 1 upsuser password master
         - Asegúrate de que los permisos del archivo estén correctamente configurados.
@@ -94,6 +101,31 @@ Al seleccionar un SAI, es fundamental considerar no solo la capacidad de VA, sin
 ## Parte 2: Monitorización de eventos con Kibana
 
 1. **Instalar Kibana.**
+![cap1](https://github.com/user-attachments/assets/202edfa4-8e99-4b51-9c0a-f90ea2a23475)
+
+![cap2](https://github.com/user-attachments/assets/d9c14003-c333-4975-ab7b-c0d1d351120c)
+
+![cap3](https://github.com/user-attachments/assets/dc17f807-cf02-4736-b99a-0313a73432f6)
+
+![cap4](https://github.com/user-attachments/assets/bab9c2dd-40e5-4793-b9f3-d5cef8902b18)
+
+![cap5](https://github.com/user-attachments/assets/4dc52f15-8570-46e0-99c4-a4b34e98e37c)
+
+![cap6](https://github.com/user-attachments/assets/c9a313b0-03b2-44f1-ba61-0c401f6b4ff2)
+
+![cap7](https://github.com/user-attachments/assets/f9fc832d-aa96-4dd9-a2ef-27240f929393)
+
+![cap8](https://github.com/user-attachments/assets/f7e9b816-079f-4dbd-8953-3ad4e304addc)
+
+2. **Configurar NUT para enviar logs.**
+   - NUT registra eventos críticos, como batería baja o fallos de alimentación, en el archivo de log del sistema. Estos logs pueden enviarse a Kibana para su análisis. Asegúrate de que rsyslog esté configurado para enviar los logs al puerto adecuado de Kibana.
+
+
+![cap9](https://github.com/user-attachments/assets/d708a0a5-5d21-4e3c-9dfa-5ddda9145bb2)
+
+![cap10](https://github.com/user-attachments/assets/bb2001b8-dc87-4331-a612-a9d2f23d29dc)
+
+![capfin](https://github.com/user-attachments/assets/2a88a6f5-7ad3-4e4c-8bd3-630ffa54c271)
 
 2. **Configurar NUT para enviar logs.**
    - NUT registra eventos críticos, como batería baja o fallos de alimentación, en el archivo de log del sistema. Estos logs pueden enviarse a Kibana para su análisis. Asegúrate de que rsyslog esté configurado para enviar los logs al puerto adecuado de Kibana.
