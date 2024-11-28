@@ -21,14 +21,11 @@
 </head>
 <body>
     <?php
-    // Recuperar datos del formulario anterior
     $nombre = htmlspecialchars($_POST['nombre']);
     $apellidos = htmlspecialchars($_POST['apellidos']);
     $edad = htmlspecialchars($_POST['edad']);
     $suerte = htmlspecialchars($_POST['suerte']);
-    
-    // Calcular el premio
-    $premio = 100 * $suerte * rand(1, 5); // Premio aleatorio basado en el número de la suerte
+    $premio = 100 * $suerte * rand(1, 5); 
     ?>
     
     <h1><?php echo $premio; ?></h1>
