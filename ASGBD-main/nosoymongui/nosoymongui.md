@@ -79,9 +79,5 @@ Basándose en el esquema relacional anterior, se debe diseñar la estructura de 
 
 
 ### B. Realiza lo mismo desde la interfaz gráfica MongoDB Compass creando una base de datos llamada mi_comercio2
+
 - 1. Reflexión sobre las diferencias entre trabajar con MongoDB desde la terminal y desde Compass, destacando ventajas y desventajas de cada método.
-- Instalaremos MongoDB Compass para proceder a crear la base de datos:
-
-- Una vez instalado ya podremos comenzar a utilziar MongoDB Compass:
-
-- Crearemos la base de datos mi_comercio2:
