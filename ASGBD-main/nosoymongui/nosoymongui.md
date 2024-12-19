@@ -355,7 +355,7 @@ db.order_products.insertMany([
       }
       ]);
       ```
-      ![cap23](https://github.com/user-attachments/assets/3ea9bb92-57f0-4b96-a22f-a98b85283339)
+![cap23](https://github.com/user-attachments/assets/3ea9bb92-57f0-4b96-a22f-a98b85283339)
 
     ### Resumen de Consultas en MongoDB
 
