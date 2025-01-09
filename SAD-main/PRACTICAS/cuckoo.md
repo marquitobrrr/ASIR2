@@ -107,6 +107,7 @@ En VirtualBox, ve a **Preferencias > Red > Redes Host-Only**:
   - Agrega una nueva red con el siguiente rango:
     - Dirección IP: 192.168.56.1
     - Máscara: 255.255.255.0
+      
 ![cap8](https://github.com/user-attachments/assets/1fbd46f9-77e5-4761-b2c5-54562bb2537e)
 
 ### 3.2 Configurar el huésped para análisis
@@ -114,6 +115,8 @@ En VirtualBox, ve a **Preferencias > Red > Redes Host-Only**:
 Configura la IP estática del huésped en el mismo rango que la red Host-Only:
   - IP: 192.168.56.101
   - Gateway: 192.168.56.1
+    
+![cap9](https://github.com/user-attachments/assets/950f7e85-96c0-48ea-b894-b26272dde98b)
 
 ### 3.3 Configurar agente de Cuckoo
 
@@ -124,10 +127,14 @@ Descarga y ejecuta el agente de Cuckoo en el huésped:
 ### 4.1 Editar configuraciones principales
 
 Modifica el archivo ~/.cuckoo/conf/cuckoo.conf:
-ini
+
+```javascript
 [virtualbox]
 path = /usr/bin/VBoxManage
-machines = WinTest
+machines = cuckoo1
+```
+![cap14](https://github.com/user-attachments/assets/08f6d65c-9fd9-4932-97cf-8a545a25a45b)
+
 ### 4.2 Verificar configuración
 
 Verifica que el anfitrión pueda comunicarse con el huésped:
@@ -136,9 +143,10 @@ ping 192.168.56.101
 
 ### 4.3 Ejecutar una muestra
 
-Lanza Cuckoo y carga una muestra de malware:
-bash
-cuckoo submit /path/to/sample.exe
+Lanza Cuckoo
+
+![cap11](https://github.com/user-attachments/assets/820f65d3-b674-4d34-8b6f-1c10a43d0c39)
+
 ### 4.4 Monitorear el análisis
 
 
