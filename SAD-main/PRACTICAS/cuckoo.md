@@ -6,7 +6,7 @@
 Asegúrate de tener una distribución Linux (preferiblemente Ubuntu o Debian).
 Instala las siguientes dependencias:
 bash
-sudo apt update && sudo apt install -y python3 python3-pip virtualbox tcpdump
+sudo apt update && sudo apt upgrade -y
 
 ### 1.2 Crear y activar un entorno virtual de Python
 
