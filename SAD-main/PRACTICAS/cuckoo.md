@@ -5,8 +5,14 @@
 
 Asegúrate de tener una distribución Linux (preferiblemente Ubuntu o Debian).
 Instala las siguientes dependencias:
-bash
-sudo apt update && sudo apt upgrade -y
+
+    ```bash
+    sudo apt update && sudo apt upgrade -y
+    ```
+    
+    ```bash
+    sudo apt install -y python3 python3-pip python3-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev zlib1g-dev postgresql postgresql-contrib mongodb redis-server tcpdump libvirt-daemon libvirt-daemon-system libvirt-clients qemu-kvm virtualbox
+    ```
 
 ### 1.2 Crear y activar un entorno virtual de Python
 
