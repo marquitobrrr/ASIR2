@@ -100,7 +100,7 @@ Herramientas complementarias y tecnologías relacionadas que mejoran el uso y la
 ### ¿Qué es Cassandra?
 Apache Cassandra es un sistema de gestión de bases de datos distribuido, de código abierto, diseñado para manejar grandes volúmenes de datos distribuidos en múltiples servidores. Proporciona alta disponibilidad, escalabilidad horizontal y tolerancia a fallos. Inicialmente desarrollado por Facebook, ahora es mantenido por la Apache Software Foundation.
 
-### Resumen Breve: Características Clave de Cassandra
+### Características Clave de Cassandra
 - **Modelo de Columnas**: Organización orientada a columnas para consultas rápidas en grandes datos.
 - **Arquitectura Descentralizada**: Nodos iguales sin puntos únicos de falla.
 - **Replicación Automática**: Garantiza redundancia y disponibilidad.
@@ -109,7 +109,7 @@ Apache Cassandra es un sistema de gestión de bases de datos distribuido, de có
 - **CQL**: Lenguaje de consultas similar a SQL, fácil de usar.
 - **Soporte Multidatacentro**: Baja latencia y resiliencia global.
 
-### Resumen Breve: Arquitectura Interna de Cassandra
+### Arquitectura Interna de Cassandra
 - **Clúster y Nodos**: Grupo de servidores que distribuyen datos para balancear carga y garantizar disponibilidad ante fallos.
 - **Distribución por Hash**: Asigna datos a nodos mediante un anillo de hash para distribución uniforme.
 - **Estrategias de Replicación**:
@@ -122,7 +122,7 @@ Apache Cassandra es un sistema de gestión de bases de datos distribuido, de có
 
 Cassandra asegura datos distribuidos, accesibles y eficientes.
 
-### Resumen Breve: Herramientas y Ecosistema de Cassandra
+### Herramientas y Ecosistema de Cassandra
 - **DataStax Enterprise (DSE)**: Versión comercial de Cassandra con análisis en tiempo real, seguridad mejorada y soporte técnico, ideal para empresas con necesidades avanzadas.
 - **OpsCenter**: Herramienta visual para gestionar clústeres, monitorear métricas, configurar nodos y realizar copias de seguridad fácilmente.
 - **Integraciones**:
@@ -131,13 +131,13 @@ Cassandra asegura datos distribuidos, accesibles y eficientes.
 
 Estas herramientas amplían las capacidades de Cassandra en gestión, análisis y escalabilidad.
 
-### Resumen Breve: Mejores Prácticas para Implementación de Cassandra
+### Mejores Prácticas para Implementación de Cassandra
 - **Diseño de Esquema**: Basado en patrones de acceso para optimizar consultas.
 - **Configuración del Clúster**: Hardware adecuado y configuración correcta en nodos.
 - **Supervisión**: Monitoreo constante con herramientas como Prometheus u OpsCenter.
 - **Pruebas de Rendimiento**: Evaluar la capacidad del sistema con pruebas de carga.
 
-### Resumen Breve: Principales Casos de Uso de Cassandra
+### Principales Casos de Uso de Cassandra
 - **Análisis de Datos**: Empresas como Netflix y Spotify gestionan datos en tiempo real.
 - **Sistemas en Tiempo Real**: Ideal para aplicaciones como mensajería o transacciones financieras.
 - **Internet de las Cosas (IoT)**: Manejo de datos distribuidos y no estructurados de dispositivos IoT.
