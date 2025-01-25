@@ -31,6 +31,7 @@
         "tipo": "Melocotón Amarillo",
         "suavidad": true
       });
+      ```
 ![cap4](https://github.com/user-attachments/assets/5a413f1f-75e8-4bdb-80b9-e9d370cf3c14)
 
 - Caquis:
@@ -62,7 +63,7 @@ Basándose en el esquema relacional anterior, se debe diseñar la estructura de 
     - name (TEXT)
     - email (TEXT)
 
-      ```json
+      ```bash
        db.users.insertOne({
            "user_id": 1,
            "name": "Alice",
@@ -76,7 +77,7 @@ Basándose en el esquema relacional anterior, se debe diseñar la estructura de 
     - user_id (FOREIGN KEY)
     - total (REAL)
 
-      ```json
+      ```bash
        db.orders.insertOne({
            "order_id": 1,
            "user_id": 1,
@@ -90,7 +91,7 @@ Basándose en el esquema relacional anterior, se debe diseñar la estructura de 
     - name (TEXT)
     - price (REAL)
 
-      ```json
+      ```bash
        db.products.insertOne({
            "product_id": 1,
            "name": "Laptop",
@@ -103,7 +104,7 @@ Basándose en el esquema relacional anterior, se debe diseñar la estructura de 
     - order_id (FOREIGN KEY)
     - product_id (FOREIGN KEY)
 
-     ```json
+     ```bash
      db.order_products.insertOne({
          "order_id": 1,
          "product_id": 1
@@ -158,45 +159,45 @@ db.order_products.insertMany([
 ---
 
 - Realiza las siguientes consultas:
-    - Consulta 0: Lista todas la colecciones
+- Consulta 0: Lista todas la colecciones
       
-      ```bash
+  ```bash
       show collections
-      ```
-      ![cap14](https://github.com/user-attachments/assets/d60a4a84-96c4-43c4-91a3-68948deb5d0e)
+  ```
+![cap14](https://github.com/user-attachments/assets/d60a4a84-96c4-43c4-91a3-68948deb5d0e)
 
-    - Consulta 1: Listar todos los usuarios
+- Consulta 1: Listar todos los usuarios
  
-      ```bash
+  ```bash
       db.users.find()
-      ```
+  ```
 ![cap15](https://github.com/user-attachments/assets/edae172c-4961-4cea-ba34-52f6ac7ebf6a)
 
-    - Consulta 2: Buscar pedidos de un usuario cuyo id sea 1
- 
-      ```bash
+- Consulta 2: Buscar pedidos de un usuario cuyo id sea 1
+    
+ ```bash
       db.orders.find({ "user_id": 1 })
-      ```
+  ```
 ![cap16](https://github.com/user-attachments/assets/51d8e0ba-5d9e-4a78-931e-7bc7686c07e9)
 
-    - Consulta 3: Listar productos con precio mayor a 30
- 
-      ```bash
+- Consulta 3: Listar productos con precio mayor a 30
+    
+  ```bash
       db.products.find({ "price": { $gt: 30 } })
-      ```
+  ```
 ![cap17](https://github.com/user-attachments/assets/5e2c86d6-acf1-4828-8387-551e61a0c702)
 
-    - Consulta 4: Buscar pedidos que contengan un producto con id = 2
- 
-      ```bash
+- Consulta 4: Buscar pedidos que contengan un producto con id = 2
+  
+  ```bash
       db.order_products.find({ "product_id": 2 })
-      ```
+  ```
 ![cap18](https://github.com/user-attachments/assets/d68fe1f0-e4c7-4af1-9c1a-706a773de5fc)
 
-    - Consulta 5: Obtener usuarios que hayan realizado pedidos con un total mayor a 40
-
-      ```bash
-      db.users.aggregate([
+- Consulta 5: Obtener usuarios que hayan realizado pedidos con un total mayor a 40
+  
+  ```bash
+   db.users.aggregate([
       {
           $lookup: {
               from: "orders",
@@ -222,26 +223,26 @@ db.order_products.insertMany([
           }
       }
       ]);
-      ```
+  ```
 ![cap19](https://github.com/user-attachments/assets/d8dc86d6-7655-4c1c-a1db-b3395e03072b)
 
-    - Consulta 6: Mostrar solo los nombres y correos de los usuarios
+- Consulta 6: Mostrar solo los nombres y correos de los usuarios
 
-      ```bash
-      db.users.find({}, { _id: 0, name: 1, email: 1 });
-      ```
+  ```bash
+  db.users.find({}, { _id: 0, name: 1, email: 1 });
+  ```
 ![cap20](https://github.com/user-attachments/assets/63ca659e-be54-42d4-b1ff-c652f7cd9661)
 
-    - Consulta 7: Contar cuántos productos tienen un precio menor o igual a 50
+- Consulta 7: Contar cuántos productos tienen un precio menor o igual a 50
 
-      ```bash
+  ```bash
       db.products.countDocuments({ price: { $lte: 50 } });
-      ```
+  ```
 ![cap21](https://github.com/user-attachments/assets/92d3d1c4-726e-4ec3-aeb3-88916f90cce9)
 
-    - Consulta 8: Encontrar usuarios que hayan pedido un producto llamado "Mouse"
+- Consulta 8: Encontrar usuarios que hayan pedido un producto llamado "Mouse"
 
-      ```bash
+  ```bash
       db.users.aggregate([
       {
           $lookup: {
@@ -290,12 +291,12 @@ db.order_products.insertMany([
           }
       }
       ]);
-      ```
+   ```
 ![cap22](https://github.com/user-attachments/assets/274a1bd7-bdf2-480e-bbe7-cebf3a4b3888)
 
-    - Consulta 9: Agrupar los pedidos por usuario y calcular el total gastado por cada uno
+- Consulta 9: Agrupar los pedidos por usuario y calcular el total gastado por cada uno
 
-      ```bash
+  ```bash
         db.orders.aggregate([
       {
           $group: {
@@ -324,11 +325,11 @@ db.order_products.insertMany([
           }
       }
       ]);
-      ```
+  ```
 
-    - Consulta 10: Listar productos únicos comprados en todos los pedidos
+- Consulta 10: Listar productos únicos comprados en todos los pedidos
 
-      ```bash
+  ```bash
         db.order_products.aggregate([
       {
           $lookup: {
@@ -354,43 +355,43 @@ db.order_products.insertMany([
           }
       }
       ]);
-      ```
+  ```
 ![cap23](https://github.com/user-attachments/assets/3ea9bb92-57f0-4b96-a22f-a98b85283339)
 
-    ### Resumen de Consultas en MongoDB
+### Resumen de Consultas en MongoDB
 
-    #### Consulta 0: Lista todas las colecciones
-    - Muestra todas las colecciones disponibles en la base de datos actual.
+#### Consulta 0: Lista todas las colecciones
+- Muestra todas las colecciones disponibles en la base de datos actual.
     
-    #### Consulta 1: Listar todos los usuarios
-    - Devuelve todos los documentos de la colección `users`.
+#### Consulta 1: Listar todos los usuarios
+- Devuelve todos los documentos de la colección `users`.
     
-    #### Consulta 2: Buscar pedidos de un usuario cuyo `user_id` sea 1
-    - Encuentra todos los pedidos asociados al usuario con `user_id = 1` en la colección `orders`.
+#### Consulta 2: Buscar pedidos de un usuario cuyo `user_id` sea 1
+- Encuentra todos los pedidos asociados al usuario con `user_id = 1` en la colección `orders`.
     
-    #### Consulta 3: Listar productos con precio mayor a 30
-    - Muestra todos los productos cuyo precio es superior a 30.
+#### Consulta 3: Listar productos con precio mayor a 30
+- Muestra todos los productos cuyo precio es superior a 30.
     
-    #### Consulta 4: Buscar pedidos que contengan un producto con `product_id = 2`
-    - Identifica los pedidos que incluyen el producto con `product_id = 2`.
+#### Consulta 4: Buscar pedidos que contengan un producto con `product_id = 2`
+- Identifica los pedidos que incluyen el producto con `product_id = 2`.
     
-    #### Consulta 5: Obtener usuarios que hayan realizado pedidos con un total mayor a 40
-    - Filtra usuarios cuyos pedidos tengan un total superior a 40 e incluye su información básica.
+#### Consulta 5: Obtener usuarios que hayan realizado pedidos con un total mayor a 40
+- Filtra usuarios cuyos pedidos tengan un total superior a 40 e incluye su información básica.
     
-    #### Consulta 6: Mostrar solo los nombres y correos de los usuarios
-    - Extrae únicamente el nombre y correo electrónico de todos los usuarios.
+#### Consulta 6: Mostrar solo los nombres y correos de los usuarios
+- Extrae únicamente el nombre y correo electrónico de todos los usuarios.
     
-    #### Consulta 7: Contar cuántos productos tienen un precio menor o igual a 50
-    - Cuenta el número de productos cuyo precio es menor o igual a 50.
+#### Consulta 7: Contar cuántos productos tienen un precio menor o igual a 50
+- Cuenta el número de productos cuyo precio es menor o igual a 50.
     
-    #### Consulta 8: Encontrar usuarios que hayan pedido un producto llamado "Mouse"
-    - Identifica a los usuarios que hayan comprado un producto con el nombre "Mouse".
+#### Consulta 8: Encontrar usuarios que hayan pedido un producto llamado "Mouse"
+- Identifica a los usuarios que hayan comprado un producto con el nombre "Mouse".
     
-    #### Consulta 9: Agrupar los pedidos por usuario y calcular el total gastado por cada uno
-    - Calcula el gasto total acumulado por cada usuario considerando sus pedidos.
+#### Consulta 9: Agrupar los pedidos por usuario y calcular el total gastado por cada uno
+- Calcula el gasto total acumulado por cada usuario considerando sus pedidos.
     
-    #### Consulta 10: Listar productos únicos comprados en todos los pedidos
-    - Genera una lista de productos únicos que hayan sido adquiridos en los pedidos realizados.
+#### Consulta 10: Listar productos únicos comprados en todos los pedidos
+- Genera una lista de productos únicos que hayan sido adquiridos en los pedidos realizados.
 
 ### B. Realiza lo mismo desde la interfaz gráfica MongoDB Compass creando una base de datos llamada mi_comercio2
 
