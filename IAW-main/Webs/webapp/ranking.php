@@ -3,8 +3,7 @@ require 'session.php';
 checkSession();
 require 'db.php';
 
-$stmt = $pdo->query("SELECT username, score, created_at FROM ranking ORDER BY score ASC LIMIT 10");
-$rankings = $stmt->fetchAll();
+$result = $conn->query("SELECT username, score, created_at FROM ranking ORDER BY score ASC LIMIT 10");
 ?>
 
 <!DOCTYPE html>
@@ -21,14 +20,14 @@ $rankings = $stmt->fetchAll();
             <th>Puntuación</th>
             <th>Fecha</th>
         </tr>
-        <?php foreach ($rankings as $index => $row): ?>
+        <?php $pos = 1; while ($row = $result->fetch_assoc()): ?>
             <tr>
-                <td><?= $index + 1 ?></td>
+                <td><?= $pos++ ?></td>
                 <td><?= htmlspecialchars($row['username']) ?></td>
                 <td><?= $row['score'] ?></td>
                 <td><?= $row['created_at'] ?></td>
             </tr>
-        <?php endforeach; ?>
+        <?php endwhile; ?>
     </table>
 </body>
 </html>

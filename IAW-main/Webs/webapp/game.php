@@ -14,13 +14,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user_id = $_SESSION['user_id'];
 
         // Guardar el juego como completado
-        $stmt = $pdo->prepare("INSERT INTO games (user_id, attempts, completed) VALUES (?, ?, ?)");
-        $stmt->execute([$user_id, $attempts, true]);
+        $stmt = $conn->prepare("INSERT INTO games (user_id, attempts, completed) VALUES (?, ?, ?)");
+        $stmt->bind_param("iii", $user_id, $attempts, $completed);
+        $completed = true;
+        $stmt->execute();
 
         // Guardar en ranking si el usuario quiere
         if (isset($_POST['save_ranking']) && $_POST['save_ranking'] === 'yes') {
-            $stmt = $pdo->prepare("INSERT INTO ranking (user_id, username, score) VALUES (?, ?, ?)");
-            $stmt->execute([$user_id, $_SESSION['username'], $attempts]);
+            $stmt = $conn->prepare("INSERT INTO ranking (user_id, username, score) VALUES (?, ?, ?)");
+            $stmt->bind_param("isi", $user_id, $_SESSION['username'], $attempts);
+            $stmt->execute();
         }
 
         echo "<p>¡Felicidades! Adivinaste en $attempts intentos.</p>";

@@ -6,13 +6,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $is_superuser = isset($_POST['is_superuser']) ? 1 : 0;
 
-    $stmt = $pdo->prepare("INSERT INTO users (username, password, is_superuser) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO users (username, password, is_superuser) VALUES (?, ?, ?)");
+    $stmt->bind_param("ssi", $username, $password, $is_superuser);
+
     try {
-        $stmt->execute([$username, $password, $is_superuser]);
+        $stmt->execute();
         header('Location: index.php');
-    } catch (PDOException $e) {
+    } catch (Exception $e) {
         $error = "Error: " . $e->getMessage();
     }
+    $stmt->close();
 }
 ?>
 
