@@ -1,33 +1,48 @@
 <?php
-require 'session.php';
-checkSession();
 require 'db.php';
+session_start();
 
-$randomNumber = rand(1, 100);
-$attempts = 0;
+// Verificar si el usuario está logado
+if (!isset($_SESSION['user_id'])) {
+    header('Location: index.php');
+    exit();
+}
 
+$user_id = $_SESSION['user_id'];
+$username = $_SESSION['username'];
+
+// Inicializar variables
+$message = "";
+$generated_number = null;
+
+// Procesar el formulario si se envía
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $guess = (int)$_POST['guess'];
-    $attempts = (int)$_POST['attempts'] + 1;
+    $user_guess = intval($_POST['user_guess']);
+    $generated_number = rand(1, 10); // Generar un número aleatorio entre 1 y 10
 
-    if ($guess === $randomNumber) {
-        $user_id = $_SESSION['user_id'];
-
-        // Guardar el juego como completado
-        $stmt = $conn->prepare("INSERT INTO games (user_id, attempts, completed) VALUES (?, ?, ?)");
-        $stmt->bind_param("iii", $user_id, $attempts, $completed);
-        $completed = true;
+    if ($user_guess === $generated_number) {
+        $message = "¡Felicidades! Has acertado el número $generated_number.";
+        
+        // Verificar si el usuario ya tiene una entrada en la tabla ranking
+        $stmt = $conn->prepare("SELECT * FROM ranking WHERE user_id = ?");
+        $stmt->bind_param("i", $user_id);
         $stmt->execute();
+        $result = $stmt->get_result();
 
-        // Guardar en ranking si el usuario quiere
-        if (isset($_POST['save_ranking']) && $_POST['save_ranking'] === 'yes') {
+        if ($result->num_rows > 0) {
+            // Si existe, actualizar el puntaje
+            $stmt = $conn->prepare("UPDATE ranking SET score = score + 1 WHERE user_id = ?");
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+        } else {
+            // Si no existe, crear una nueva entrada en el ranking
             $stmt = $conn->prepare("INSERT INTO ranking (user_id, username, score) VALUES (?, ?, ?)");
-            $stmt->bind_param("isi", $user_id, $_SESSION['username'], $attempts);
+            $stmt->bind_param("isi", $user_id, $username, $score);
+            $score = 1;
             $stmt->execute();
         }
-
-        echo "<p>¡Felicidades! Adivinaste en $attempts intentos.</p>";
-        exit();
+    } else {
+        $message = "Lo siento, no has acertado. El número era $generated_number.";
     }
 }
 ?>
@@ -35,14 +50,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Juego</title>
+    <title>Juego Número Oculto</title>
 </head>
 <body>
-    <h1>Juego del Número Oculto</h1>
+    <h1>Juego Número Oculto</h1>
+    <p>Introduce un número del 1 al 10:</p>
     <form method="post">
-        <input type="number" name="guess" required>
-        <input type="hidden" name="attempts" value="<?= $attempts ?>">
-        <button type="submit">Probar</button>
+        <input type="number" name="user_guess" min="1" max="10" required>
+        <button type="submit">Adivinar</button>
     </form>
+
+    <?php if ($message): ?>
+        <p><strong><?php echo $message; ?></strong></p>
+    <?php endif; ?>
+
+    <a href="dashboard.php">Volver al Dashboard</a>
 </body>
 </html>

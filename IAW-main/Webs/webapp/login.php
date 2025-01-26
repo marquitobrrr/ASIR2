@@ -61,5 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Iniciar Sesión</button>
     </form>
     <?php if (isset($error)) echo "<p>$error</p>"; ?>
+    <a href="index.php">Crear una cuenta</a>
 </body>
 </html>

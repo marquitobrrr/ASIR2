@@ -3,7 +3,7 @@ require 'session.php';
 checkSession();
 require 'db.php';
 
-$result = $conn->query("SELECT username, score, created_at FROM ranking ORDER BY score ASC LIMIT 10");
+$result = $conn->query("SELECT username, score, FROM ranking ORDER BY score ASC LIMIT 10");
 ?>
 
 <!DOCTYPE html>
@@ -18,14 +18,12 @@ $result = $conn->query("SELECT username, score, created_at FROM ranking ORDER BY
             <th>Posición</th>
             <th>Usuario</th>
             <th>Puntuación</th>
-            <th>Fecha</th>
         </tr>
         <?php $pos = 1; while ($row = $result->fetch_assoc()): ?>
             <tr>
                 <td><?= $pos++ ?></td>
                 <td><?= htmlspecialchars($row['username']) ?></td>
                 <td><?= $row['score'] ?></td>
-                <td><?= $row['created_at'] ?></td>
             </tr>
         <?php endwhile; ?>
     </table>
