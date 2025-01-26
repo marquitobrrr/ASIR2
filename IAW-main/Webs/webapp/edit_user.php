@@ -23,9 +23,20 @@ if (isset($_GET['id'])) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $new_username = $_POST['username'];
         $new_is_superuser = isset($_POST['is_superuser']) ? 1 : 0;
+        $new_password = $_POST['password'];
 
-        $stmt = $conn->prepare("UPDATE users SET username = ?, is_superuser = ? WHERE id = ?");
-        $stmt->bind_param("sii", $new_username, $new_is_superuser, $user_id);
+        // Si se proporciona una nueva contraseña, encriptarla
+        if (!empty($new_password)) {
+            $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
+
+            // Actualizar con contraseña
+            $stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, is_superuser = ? WHERE id = ?");
+            $stmt->bind_param("ssii", $new_username, $hashed_password, $new_is_superuser, $user_id);
+        } else {
+            // Actualizar sin cambiar la contraseña
+            $stmt = $conn->prepare("UPDATE users SET username = ?, is_superuser = ? WHERE id = ?");
+            $stmt->bind_param("sii", $new_username, $new_is_superuser, $user_id);
+        }
 
         if ($stmt->execute()) {
             $success = "Usuario modificado correctamente.";
@@ -55,10 +66,18 @@ if (isset($_GET['id'])) {
     <?php if (isset($success)) echo "<p style='color:green;'>$success</p>"; ?>
     <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
     <form method="post">
+        <label>Nombre de usuario:</label>
         <input type="text" name="username" value="<?php echo $user['username']; ?>" required>
-        <label>
-            <input type="checkbox" name="is_superuser" <?php echo $user['is_superuser'] ? 'checked' : ''; ?>> ¿Es superusuario?
-        </label>
+        <br>
+
+        <label>¿Es superusuario?</label>
+        <input type="checkbox" name="is_superuser" <?php echo $user['is_superuser'] ? 'checked' : ''; ?>>
+        <br>
+
+        <label>Cambiar contraseña (opcional):</label>
+        <input type="password" name="password" placeholder="Nueva contraseña">
+        <br>
+
         <button type="submit">Guardar Cambios</button>
     </form>
 

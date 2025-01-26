@@ -19,7 +19,7 @@ $result = $conn->query("SELECT * FROM users");
 </head>
 <body>
     <h1>Dashboard</h1>
-    <p>Bienvenido, <?php echo $_SESSION['username']; ?> | <a href="logout.php">Cerrar sesión</a></p>
+    <p>Bienvenido, <?php echo $_SESSION['username']; ?> | <a href="index.php">Cerrar sesión</a></p>
 
     <h2>Usuarios</h2>
     <table border="1">
