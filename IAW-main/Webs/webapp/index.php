@@ -43,6 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php if (isset($error)) echo "<p>$error</p>"; ?>
 
     <!-- Botón para ir al login si ya tienes cuenta -->
-    <p>¿Ya tienes una cuenta? <a href="index.php">Inicia sesión aquí</a></p>
+    <p>¿Ya tienes una cuenta? <a href="login.php">Inicia sesión aquí</a></p>
 </body>
 </html>

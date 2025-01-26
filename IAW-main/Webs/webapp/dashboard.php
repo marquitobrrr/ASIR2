@@ -1,30 +1,51 @@
 <?php
-require 'session.php';
-checkSession();
 require 'db.php';
+session_start();
 
-$is_superuser = $_SESSION['is_superuser'];
-
-if ($is_superuser) {
-    echo "<h1>Bienvenido, Superusuario {$_SESSION['username']}</h1>";
-    echo "<a href='logout.php'>Cerrar sesión</a> | <a href='game_history.php'>Historial de Juegos</a>";
-
-    $result = $conn->query("SELECT * FROM users");
-
-    echo "<table border='1'>";
-    echo "<tr><th>ID</th><th>Usuario</th><th>Acciones</th></tr>";
-    while ($user = $result->fetch_assoc()) {
-        echo "<tr>
-                <td>{$user['id']}</td>
-                <td>{$user['username']}</td>
-                <td>
-                    <a href='delete_user.php?id={$user['id']}'>Borrar</a>
-                </td>
-              </tr>";
-    }
-    echo "</table>";
-} else {
-    echo "<h1>Bienvenido, Usuario {$_SESSION['username']}</h1>";
-    echo "<a href='game.php'>Jugar</a> | <a href='ranking.php'>Ranking</a> | <a href='logout.php'>Cerrar sesión</a>";
+// Verificar si el usuario está logado
+if (!isset($_SESSION['user_id'])) {
+    header('Location: index.php');
+    exit();
 }
+
+// Obtener todos los usuarios para mostrarlos en la tabla
+$result = $conn->query("SELECT * FROM users");
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <p>Bienvenido, <?php echo $_SESSION['username']; ?> | <a href="logout.php">Cerrar sesión</a></p>
+
+    <h2>Usuarios</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Superusuario</th>
+            <th>Acciones</th>
+        </tr>
+        <?php while ($user = $result->fetch_assoc()) : ?>
+        <tr>
+            <td><?php echo $user['id']; ?></td>
+            <td><?php echo $user['username']; ?></td>
+            <td><?php echo $user['is_superuser'] ? 'Sí' : 'No'; ?></td>
+            <td>
+                <!-- Botón para borrar usuario -->
+                <a href="delete_user.php?id=<?php echo $user['id']; ?>">Borrar</a>
+
+                <!-- Botón para ver usuario -->
+                <a href="view_user.php?id=<?php echo $user['id']; ?>">Ver</a>
+
+                <!-- Botón para modificar usuario -->
+                <a href="edit_user.php?id=<?php echo $user['id']; ?>">Modificar</a>
+            </td>
+        </tr>
+        <?php endwhile; ?>
+    </table>
+</body>
+</html>
