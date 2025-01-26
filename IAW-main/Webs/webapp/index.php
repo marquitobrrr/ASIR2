@@ -1,26 +1,26 @@
 <?php
 require 'db.php';
-session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $is_superuser = isset($_POST['is_superuser']) ? 1 : 0;
 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
+    // Encriptar la contraseña
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['is_superuser'] = $user['is_superuser'];
-        header('Location: dashboard.php');
+    // Insertar usuario en la base de datos
+    $stmt = $conn->prepare("INSERT INTO users (username, password, is_superuser) VALUES (?, ?, ?)");
+    $stmt->bind_param("ssi", $username, $hashed_password, $is_superuser);
+
+    if ($stmt->execute()) {
+        // Redirigir al login después del registro exitoso
+        header('Location: index.php');
         exit();
     } else {
-        $error = "Usuario o contraseña incorrectos.";
+        $error = "Error al registrar el usuario.";
     }
+
     $stmt->close();
 }
 ?>
@@ -28,15 +28,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Registro</title>
 </head>
 <body>
-    <h1>Login</h1>
+    <h1>Registro</h1>
     <form method="post">
         <input type="text" name="username" placeholder="Usuario" required>
         <input type="password" name="password" placeholder="Contraseña" required>
-        <button type="submit">Iniciar Sesión</button>
+        <label>
+            <input type="checkbox" name="is_superuser"> ¿Es superusuario?
+        </label>
+        <button type="submit">Registrar</button>
     </form>
     <?php if (isset($error)) echo "<p>$error</p>"; ?>
+
+    <!-- Botón para ir al login si ya tienes cuenta -->
+    <p>¿Ya tienes una cuenta? <a href="index.php">Inicia sesión aquí</a></p>
 </body>
 </html>
