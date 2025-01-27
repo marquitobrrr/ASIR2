@@ -57,30 +57,107 @@ if (isset($_GET['id'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 1.5rem;
+            color: #3498db;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="password"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+        }
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        button {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .success {
+            color: green;
+            text-align: center;
+        }
+        .error {
+            color: red;
+            text-align: center;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #3498db;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Modificar Usuario</h1>
-    <?php if (isset($success)) echo "<p style='color:green;'>$success</p>"; ?>
-    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
-    <form method="post">
-        <label>Nombre de usuario:</label>
-        <input type="text" name="username" value="<?php echo $user['username']; ?>" required>
-        <br>
+    <div class="container">
+        <h1>Modificar Usuario</h1>
+        <?php if (isset($success)) echo "<p class='success'>$success</p>"; ?>
+        <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
+        <form method="post">
+            <label for="username">Nombre de usuario:</label>
+            <input type="text" name="username" id="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
 
-        <label>¿Es superusuario?</label>
-        <input type="checkbox" name="is_superuser" <?php echo $user['is_superuser'] ? 'checked' : ''; ?>>
-        <br>
+            <label for="is_superuser">
+                <input type="checkbox" name="is_superuser" id="is_superuser" <?php echo $user['is_superuser'] ? 'checked' : ''; ?>>
+                ¿Es superusuario?
+            </label>
 
-        <label>Cambiar contraseña (opcional):</label>
-        <input type="password" name="password" placeholder="Nueva contraseña">
-        <br>
+            <label for="password">Cambiar contraseña (opcional):</label>
+            <input type="password" name="password" id="password" placeholder="Nueva contraseña">
 
-        <button type="submit">Guardar Cambios</button>
-    </form>
-
-    <a href="dashboard.php">Volver al Dashboard</a>
+            <button type="submit">Guardar Cambios</button>
+        </form>
+        <a href="dashboard.php" class="back-link">Volver al Dashboard</a>
+    </div>
 </body>
 </html>
