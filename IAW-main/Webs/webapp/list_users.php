@@ -7,7 +7,6 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Obtener lista de nombres de usuarios
 $stmt = $conn->prepare("SELECT username FROM users");
 $stmt->execute();
 $result = $stmt->get_result();

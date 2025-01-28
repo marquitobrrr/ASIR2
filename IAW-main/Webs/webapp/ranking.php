@@ -1,17 +1,14 @@
 <?php
 session_start();
 
-// Verificar si el usuario está logado
 if (!isset($_SESSION['username'])) {
     header('Location: login.php');
     exit();
 }
 
-// Conectar a la base de datos
 require_once 'db.php';
 
 try {
-    // Obtener los datos de la tabla ranking
     $stmt = $conn->prepare('SELECT username, score FROM ranking ORDER BY score DESC');
     $stmt->execute();
     $rankings = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);

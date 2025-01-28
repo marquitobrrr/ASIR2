@@ -2,13 +2,11 @@
 require 'db.php';
 session_start();
 
-// Verificar si el usuario está logado
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
 }
 
-// Obtener los datos del usuario logado
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username'];
 $is_superuser = $_SESSION['is_superuser'];
@@ -184,7 +182,7 @@ $is_superuser = $_SESSION['is_superuser'];
                 </table>
             <div class="options">
                 <ul>
-                    <li><a href="login.php">Cerrar sesión</a></li>
+                    <li><a href="index.php">Cerrar sesión</a></li>
                 </ul>
             </div>
             </div>
@@ -195,7 +193,7 @@ $is_superuser = $_SESSION['is_superuser'];
                     <li><a href="list_users.php">Ver Lista de Usuarios</a></li>
                     <li><a href="game.php">Jugar al Juego Número Oculto</a></li>
                     <li><a href="ranking.php">Ver Ranking</a></li>
-                    <li><a href="login.php">Cerrar sesión</a></li>
+                    <li><a href="index.php">Cerrar sesión</a></li>
                 </ul>
             </div>
         <?php endif; ?>

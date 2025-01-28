@@ -1,26 +1,43 @@
 <?php
 require 'db.php';
+session_start();
+
+function updatePlainPasswords($conn) {
+    $result = $conn->query("SELECT id, password FROM users");
+    while ($row = $result->fetch_assoc()) {
+        $user_id = $row['id'];
+        $plain_password = $row['password'];
+
+        if (!password_get_info($plain_password)['algo']) {
+            $hashed_password = password_hash($plain_password, PASSWORD_DEFAULT);
+            $stmt = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
+            $stmt->bind_param("si", $hashed_password, $user_id);
+            $stmt->execute();
+        }
+    }
+}
+
+updatePlainPasswords($conn);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $is_superuser = isset($_POST['is_superuser']) ? 1 : 0;
 
-    // Encriptar la contraseña
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
 
-    // Insertar usuario en la base de datos
-    $stmt = $conn->prepare("INSERT INTO users (username, password, is_superuser) VALUES (?, ?, ?)");
-    $stmt->bind_param("ssi", $username, $hashed_password, $is_superuser);
-
-    if ($stmt->execute()) {
-        // Redirigir al login después del registro exitoso
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['is_superuser'] = $user['is_superuser'];
         header('Location: dashboard.php');
         exit();
     } else {
-        $error = "Error al registrar el usuario.";
+        $error = "Usuario o contraseña incorrectos.";
     }
-
     $stmt->close();
 }
 ?>
@@ -30,11 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <title>Login</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(120deg, #84fab0, #8fd3f4);
+            background: linear-gradient(120deg, #a18cd1, #fbc2eb);
             margin: 0;
             padding: 0;
             display: flex;
@@ -44,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: #333;
         }
 
-        .register-container {
+        .login-container {
             background: #fff;
             border-radius: 15px;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
@@ -55,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         h1 {
-            color: #84fab0;
+            color: #a18cd1;
             font-size: 2rem;
             margin-bottom: 20px;
         }
@@ -75,12 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             width: 100%;
         }
 
-        input[type="checkbox"] {
-            margin-right: 10px;
-        }
-
         button {
-            background: #84fab0;
+            background: #a18cd1;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -91,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         button:hover {
-            background: #68d89b;
+            background: #9053c7;
         }
 
         .error {
@@ -105,30 +118,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         a {
-            color: #84fab0;
+            color: #a18cd1;
             text-decoration: none;
             font-weight: bold;
         }
 
         a:hover {
-            color: #68d89b;
+            color: #9053c7;
         }
     </style>
 </head>
 <body>
-    <div class="register-container">
-        <h1>Registro</h1>
+    <div class="login-container">
+        <h1>Login</h1>
         <form method="post">
             <input type="text" name="username" placeholder="Usuario" required>
             <input type="password" name="password" placeholder="Contraseña" required>
-            <label>
-                <input type="checkbox" name="is_superuser"> ¿Es superusuario?
-            </label>
-            <button type="submit">Registrar</button>
+            <button type="submit">Iniciar Sesión</button>
         </form>
         <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
-
-        <p>¿Ya tienes una cuenta? <a href="login.php">Inicia sesión aquí</a></p>
+        <p>¿No tienes una cuenta? <a href="create_user.php">Crear una cuenta</a></p>
     </div>
 </body>
 </html>

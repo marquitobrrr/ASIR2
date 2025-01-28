@@ -1,31 +1,28 @@
 <?php
 session_start();
 
-// Verificar si el usuario está logado
 if (!isset($_SESSION['username'])) {
     header('Location: login.php');
     exit();
 }
 
-// Lógica para reiniciar el juego
 if (isset($_POST['reset'])) {
     unset($_SESSION['random_number']);
     unset($_SESSION['attempts']);
     unset($_SESSION['history']);
     unset($_SESSION['game_over']);
-    header('Location:game.php'); // Recargar la página para empezar de nuevo
+    header('Location:game.php'); 
     exit();
 }
 
-// Inicializar las variables del juego si es la primera vez o se reinició
+
 if (!isset($_SESSION['random_number'])) {
-    $_SESSION['random_number'] = rand(1, 100); // Número aleatorio entre 1 y 100
+    $_SESSION['random_number'] = rand(1, 100); 
     $_SESSION['attempts'] = 0;
     $_SESSION['history'] = [];
-    $_SESSION['game_over'] = false; // Control de final del juego
+    $_SESSION['game_over'] = false; 
 }
 
-// Procesar los intentos del usuario
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$_SESSION['game_over']) {
     $_SESSION['attempts']++;
     $guess = (int)$_POST['guess'];
@@ -33,10 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$_SESSION['game_over']) {
     if ($guess === $_SESSION['random_number']) {
         $success = true;
 
-        // Conectar a la base de datos
         require_once 'db.php';
 
-        // Obtener el ID del usuario
         $stmt = $conn->prepare('SELECT id FROM users WHERE username = ?');
         $stmt->bind_param('s', $_SESSION['username']);
         $stmt->execute();
@@ -46,26 +41,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$_SESSION['game_over']) {
         if ($user) {
             $user_id = $user['id'];
 
-            // Actualizar la columna `score` sumando un punto
             $stmt = $conn->prepare('UPDATE ranking SET score = score + 1 WHERE user_id = ?');
             $stmt->bind_param('i', $user_id);
             $stmt->execute();
 
-            // Si el usuario no tiene entrada previa en el ranking, se crea una nueva
             if ($stmt->affected_rows === 0) {
                 $stmt = $conn->prepare('INSERT INTO ranking (user_id, username, score) VALUES (?, ?, 1)');
                 $stmt->bind_param('is', $user_id, $_SESSION['username']);
                 $stmt->execute();
             }
 
-            // Marcar el juego como finalizado
             $_SESSION['game_over'] = true;
         }
     } elseif ($_SESSION['attempts'] >= 5) {
-        $_SESSION['game_over'] = true; // Fin del juego si se supera el límite de intentos
+        $_SESSION['game_over'] = true;
         $lost = true;
     } else {
-        // Proporcionar retroalimentación según la suposición
         if ($guess > $_SESSION['random_number']) {
             $feedback = 'El número es más bajo.';
             $_SESSION['history'][] = "$guess - Demasiado alto";
