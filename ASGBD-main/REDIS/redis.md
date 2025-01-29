@@ -2,7 +2,8 @@ Realiza los siguientes pasos y ejemplos haciendo pantallazos de los más relevan
 
 # Parte 1: Instalación de Redis
 
-### Actualizar el sistema y los repositorios
+### Actualizar el sistema y los
+ repositorios
 
 ```bash
 sudo apt update && sudo apt upgrade -y
@@ -65,4 +66,70 @@ redis-cli -n 1
 ```bash
 SET clave valor
 GET clave
+```
+
+### Eliminar una clave
+```bash
+DEL clave
+```
+
+### Verificar si una clave existe
+```bash
+EXISTS clave
+```
+
+### Establecer una clave con tiempo de expiración (en segundos)
+```bash
+SETEX clave tiempo valor
+```
+
+### Obtener el tiempo restante de una clave
+```bash
+TTL clave
+```
+
+### Renombrar una clave
+```bash
+RENAME clave nueva_clave
+```
+
+## Listas
+
+### Agregar elementos al principio y al final de una lista
+```bash
+LPUSH mi_lista valor1
+RPUSH mi_lista valor2
+```
+
+### Obtener todos los elementos de una lista
+```bash
+LRANGE mi_lista 0 -1
+```
+
+### Obtener y eliminar el primer o último elemento de una lista
+```bash
+LPOP mi_lista
+RPOP mi_lista
+```
+
+### Longitud de la lista
+```bash
+LLEN mi_lista
+```
+
+## Conjuntos (Sets)
+
+### Agregar elementos a un conjunto
+```bash
+SADD mi_conjunto valor1 valor2
+```
+
+### Obtener todos los elementos de un conjunto
+```bash
+SMEMBERS mi_conjunto
+```
+
+### Verificar si un elemento pertenece a un conjunto
+```bash
+SISMEMBER mi_conjunto valor
 ```
