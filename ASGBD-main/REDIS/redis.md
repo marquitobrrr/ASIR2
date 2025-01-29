@@ -7,31 +7,37 @@
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
+![image](https://github.com/user-attachments/assets/347aa039-7305-416b-a5ae-8b2702688cc4)
 
 ### Instalar Redis
 ```bash
 sudo apt install redis-server -y
 ```
+![image](https://github.com/user-attachments/assets/d52125c1-a173-440e-9001-8e9ba6f83f21)
 
 ### Verificar la instalación
 ```bash
 php -m | grep redis  
 ```
+![image](https://github.com/user-attachments/assets/258f725d-809b-4abf-9ca1-32d9f3fb8b87)
 
 ### Iniciar el servicio de Redis
 ```bash
 sudo systemctl start redis
 ```
+![image](https://github.com/user-attachments/assets/5661d35a-825a-4aae-aa04-e042c6ebdd70)
 
 ### Habilitar Redis para que inicie automáticamente al arrancar:
 ```bash
 sudo systemctl enable redis
 ```
+![image](https://github.com/user-attachments/assets/6596d7fc-72c9-4d61-90d7-444a5768565f)
 
 ### Comprobar que el servicio está corriendo:
 ```bash
 systemctl status redis
 ```
+![image](https://github.com/user-attachments/assets/d0f9cf5f-cfc2-4b87-9bc2-2cf212a358a5)
 
 ### Parar y reiniciar
 ```bash
@@ -44,17 +50,20 @@ sudo systemctl restart redis
 ```bash
 redis-cli
 ```
+![image](https://github.com/user-attachments/assets/626849d3-aa71-49ec-ae67-2fb2f1f364b4)
 
 ### Probar un comando básico:
 ```bash
 PING
 ```
 ### Debería responder con PONG.
+![image](https://github.com/user-attachments/assets/ada6073a-327e-48fa-be88-24eaa327c091)
 
 ### Especificar una base de datos (por defecto usa la 0)
 ```bash
 redis-cli -n 1
 ```
+![image](https://github.com/user-attachments/assets/4b03758e-a202-4ffb-a828-62d936b2da3d)
 
 ---
 
@@ -68,31 +77,37 @@ redis-cli -n 1
 SET clave valor
 GET clave
 ```
+![image](https://github.com/user-attachments/assets/a2c8dd74-a7fc-4f49-b8de-3da6d58996ea)
 
 ### Eliminar una clave
 ```bash
 DEL clave
 ```
+![image](https://github.com/user-attachments/assets/6974db8f-e985-4218-bfc6-aa5745757b38)
 
 ### Verificar si una clave existe
 ```bash
 EXISTS clave
 ```
+![image](https://github.com/user-attachments/assets/9e2202c4-653c-4279-a980-38ce10cba9c8)
 
 ### Establecer una clave con tiempo de expiración (en segundos)
 ```bash
 SETEX clave tiempo valor
 ```
+![image](https://github.com/user-attachments/assets/49932984-1ec7-48b7-9b12-e508bed8edaf)
 
 ### Obtener el tiempo restante de una clave
 ```bash
 TTL clave
 ```
+![image](https://github.com/user-attachments/assets/b3ad382c-2862-4616-8e34-c06f722b6124)
 
 ### Renombrar una clave
 ```bash
 RENAME clave nueva_clave
 ```
+![image](https://github.com/user-attachments/assets/b86ad688-3135-4e79-891e-bca4627bd216)
 
 ---
 
@@ -103,22 +118,27 @@ RENAME clave nueva_clave
 LPUSH mi_lista valor1
 RPUSH mi_lista valor2
 ```
+![image](https://github.com/user-attachments/assets/2782c3a7-f000-4fae-a0d2-8be4227046fa)
+
 
 ### Obtener todos los elementos de una lista
 ```bash
 LRANGE mi_lista 0 -1
 ```
+![image](https://github.com/user-attachments/assets/73e51aad-b38a-4ef5-8cab-a15c9b9135cf)
 
 ### Obtener y eliminar el primer o último elemento de una lista
 ```bash
 LPOP mi_lista
 RPOP mi_lista
 ```
+![image](https://github.com/user-attachments/assets/808ad8a7-4f54-4238-bd8e-e38ab664edeb)
 
 ### Longitud de la lista
 ```bash
 LLEN mi_lista
 ```
+![image](https://github.com/user-attachments/assets/538bae57-ed18-4f5f-b689-28f8b05fa06c)
 
 ---
 
@@ -128,21 +148,25 @@ LLEN mi_lista
 ```bash
 SADD mi_conjunto valor1 valor2
 ```
+![image](https://github.com/user-attachments/assets/db9149b5-800b-4ca9-a350-00f6b0c24db9)
 
 ### Obtener todos los elementos de un conjunto
 ```bash
 SMEMBERS mi_conjunto
 ```
+![image](https://github.com/user-attachments/assets/98a213fe-42a9-4ff9-af64-7f48d1f4b409)
 
 ### Verificar si un elemento pertenece a un conjunto
 ```bash
 SISMEMBER mi_conjunto valor1
 ```
+![image](https://github.com/user-attachments/assets/03374ef6-6d33-4715-8102-db36cad6878e)
 
 ### Eliminar un elemento de un conjunto
 ```bash
 SREM mi_conjunto valor1
 ```
+![image](https://github.com/user-attachments/assets/e0985ce3-2ef3-4990-9fe8-76b16759893d)
 
 ### Operaciones entre conjuntos (intersección, unión, diferencia)
 ```bash
@@ -150,6 +174,7 @@ SINTER conjunto1 conjunto2
 SUNION conjunto1 conjunto2
 SDIFF conjunto1 conjunto2
 ```
+![image](https://github.com/user-attachments/assets/30786bcd-9d56-4fd3-a3c1-3fe495879341)
 
 ---
 
@@ -159,16 +184,19 @@ SDIFF conjunto1 conjunto2
 ```bash
 HSET mi_hash campo1 valor1
 ```
+![image](https://github.com/user-attachments/assets/d6356acd-fa94-4c85-9489-db0adc6103d4)
 
 ### Obtener el valor de un campo
 ```bash
 HGET mi_hash campo1
 ```
+![image](https://github.com/user-attachments/assets/8df3197e-cda6-4893-bee4-0b8cfa8c60dc)
 
 ### Obtener todos los campos y valores
 ```bash
 HGETALL mi_hash
 ```
+![image](https://github.com/user-attachments/assets/9128145a-d92f-4358-bc82-0132625e7b0d)
 
 ### Verificar si un campo existe
 ```bash
@@ -179,6 +207,7 @@ HEXISTS mi_hash campo1
 ```bash
 HDEL mi_hash campo1
 ```
+![image](https://github.com/user-attachments/assets/7770114d-42f1-4133-a35a-7d2f0687cade)
 
 ---
 
@@ -188,21 +217,25 @@ HDEL mi_hash campo1
 ```bash
 SELECT número_base_datos
 ```
+![image](https://github.com/user-attachments/assets/9ebf70ca-0b91-49ed-a87d-63a71a3073cf)
 
 ### Ver claves en la base de datos actual
 ```bash
 KEYS *
 ```
+![image](https://github.com/user-attachments/assets/525eb897-95d6-4f8f-8d4f-81590f7a5d15)
 
 ### Limpiar todas las claves de la base de datos actual
 ```bash
 FLUSHDB
 ```
+![image](https://github.com/user-attachments/assets/2ede8c86-b4ee-4635-9088-ddcfca01f301)
 
 ### Limpiar todas las claves de todas las bases de datos
 ```bash
 FLUSHALL
 ```
+![image](https://github.com/user-attachments/assets/eeee65e3-a151-4234-954c-0ee70df57cff)
 
 ---
 
@@ -213,20 +246,28 @@ FLUSHALL
 INFO
 ```
 
+![image](https://github.com/user-attachments/assets/8d81612d-c583-4f5b-a100-a017d1a1e513)
+![image](https://github.com/user-attachments/assets/aa7227a0-da7d-41da-945c-a1c191a51d8b)
+
 ### Ver estadísticas en tiempo real
 ```bash
 MONITOR
 ```
+
+![image](https://github.com/user-attachments/assets/be7d7c05-baa4-40eb-b32b-8702dbdae3de)
 
 ### Ver configuración actual
 ```bash
 CONFIG GET *
 ```
 
+![image](https://github.com/user-attachments/assets/a51a4058-2bf4-42d0-b2a4-89ce3bebec40)
+
 ### Cambiar configuración (temporalmente, mientras Redis esté en ejecución)
 ```bash
 CONFIG SET parametro valor
 ```
+![image](https://github.com/user-attachments/assets/99ab9fed-9b22-489d-bedc-760834958e68)
 
 ---
 
@@ -236,11 +277,13 @@ CONFIG SET parametro valor
 ```bash
 SAVE
 ```
+![image](https://github.com/user-attachments/assets/e82db92f-a7ea-4b55-ae5a-6e3e553e2e98)
 
 ### Realizar una copia asincrónica
 ```bash
 BGSAVE
 ```
+![image](https://github.com/user-attachments/assets/a5474f05-dda6-4611-bfb8-550b043d0e98)
 
 ---
 
