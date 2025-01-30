@@ -385,16 +385,16 @@ Usa listas (`LPUSH` y `LPOP`) o conjuntos ordenados (`ZADD` y `ZRANGE`).
    ```
    ![image](https://github.com/user-attachments/assets/d5e0c8d1-31e7-496c-a98a-7327ff56d987)
 
-3. Consultar todas las tareas en orden de prioridad.
+2. Consultar todas las tareas en orden de prioridad.
    ```bash
    ZRANGE tareas 0 -1 WITHSCORES
    ```
    ![image](https://github.com/user-attachments/assets/aed129c2-3cea-4482-879f-b2d5c463f786)
 
-5. Marcar tareas como completadas (eliminarlas de la lista).
-   ´´´bash
+3. Marcar tareas como completadas (eliminarlas de la lista).
+   ```bash
    ZREM tareas "Revisar correos"
-   ´´´
+   ```
    ![image](https://github.com/user-attachments/assets/5e1b25ac-1ebd-437e-8536-cd14c66873ca)
 
 
