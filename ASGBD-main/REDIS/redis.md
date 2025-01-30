@@ -292,21 +292,30 @@ BGSAVE
 1. **Instalar RedisInsight** (cliente visual oficial)
    - Descargar la última versión desde la web oficial:  
      [https://redis.com/redis-enterprise/redis-insight/](https://redis.com/redis-enterprise/redis-insight/)
+     
+![image](https://github.com/user-attachments/assets/d68c966a-d15a-4e4b-b425-d9807cea08ea)
 
 ### Instalar RedisInsight:
 ```bash
 sudo dpkg -i <archivo_descargado>.deb
 ```
+º![image](https://github.com/user-attachments/assets/cb3b32ec-a85c-40fa-8ff6-bb4e45040d73)
 
 ### Abrir RedisInsight:
 ```bash
 redisinsight
 ```
+![image](https://github.com/user-attachments/assets/530f6ef0-7339-441f-ae77-099b810570a5)
 
 Conectar al servidor Redis (por defecto, host: `127.0.0.1`, puerto: `6379`).
+![image](https://github.com/user-attachments/assets/b3388f38-2814-410a-a510-672933dde28c)
 
 ### Explorar Redis desde RedisInsight
 Crear claves, insertar datos en listas o hashes, y observar las estructuras visualmente.
+![image](https://github.com/user-attachments/assets/d961b9cf-7265-4bba-82dd-f9c1d219eceb)
+![image](https://github.com/user-attachments/assets/5d03cb56-cf42-47ee-a1cd-5428f52c3315)
+![image](https://github.com/user-attachments/assets/3dec7f44-5315-497d-952b-61bb7a0bb882)
+![image](https://github.com/user-attachments/assets/e00bf213-f8ae-4be1-a083-6e6e576940d5)
 
 # Parte 4: Otro ejercicio
 
@@ -315,8 +324,15 @@ Crear claves, insertar datos en listas o hashes, y observar las estructuras visu
 Crear un sistema de gestión de inventario:
 
 - Añade 5 productos (usando hashes con `HSET`).
+  ![image](https://github.com/user-attachments/assets/b4979119-2340-44b0-afad-ecfe2b51502c)
+  ![image](https://github.com/user-attachments/assets/ae0dfba5-367b-4ed7-a882-2089db3904f8)
+
 - Incrementa el stock de uno de los productos (`HINCRBY`).
+  ![image](https://github.com/user-attachments/assets/182667c1-af5d-486e-8e2a-6d8cee52d483)
+  ![image](https://github.com/user-attachments/assets/5ba29e79-e53e-49ae-a8c6-2490fe21dbe2)
+
 - Elimina un producto cuando el stock llegue a 0.
+  ![image](https://github.com/user-attachments/assets/73d0950f-9603-429c-95ad-9462246002cf)
 
 ---
 
@@ -327,6 +343,7 @@ Crear un carrito con la estructura de listas:
 LPUSH carrito "Producto1" "Producto2"
 LRANGE carrito 0 -1
 ```
+ ![image](https://github.com/user-attachments/assets/cc4dfff6-5c12-4b62-bddb-606c2371880c)
 
 ---
 
@@ -338,6 +355,7 @@ ZADD ranking 100 "usuario1" 200 "usuario2" 150 "usuario3"
 ZRANGE ranking 0 -1 WITHSCORES
 ZREVRANK ranking "usuario2"
 ```
+![image](https://github.com/user-attachments/assets/f59ead3b-f412-469f-8f56-db8dc492c9a8)
 
 ---
 
@@ -348,6 +366,7 @@ Usar listas para simular una cola de notificaciones:
 LPUSH notificaciones "Notificación 1" "Notificación 2"
 RPOP notificaciones
 ```
+![image](https://github.com/user-attachments/assets/d430211e-5bac-46b6-97e9-40741711d77d)
 
 ---
 
@@ -355,9 +374,27 @@ RPOP notificaciones
 
 Diseña un sistema de control de tareas con Redis. Debe permitir:
 
-1. Añadir tareas con nombre y prioridad.
-2. Consultar todas las tareas en orden de prioridad.
-3. Marcar tareas como completadas (eliminarlas de la lista).
-
-### Pistas:
+#### Pistas:
 Usa listas (`LPUSH` y `LPOP`) o conjuntos ordenados (`ZADD` y `ZRANGE`).
+
+1. Añadir tareas con nombre y prioridad.
+   ```bash
+   ZADD tareas 1 "Revisar correos"
+   ZADD tareas 2 "ActZREM tareas "Revisar correos"ualizar softwares"
+   ZADD tareas 2 "Revisar logs"
+   ```
+   ![image](https://github.com/user-attachments/assets/d5e0c8d1-31e7-496c-a98a-7327ff56d987)
+
+3. Consultar todas las tareas en orden de prioridad.
+   ```bash
+   ZRANGE tareas 0 -1 WITHSCORES
+   ```
+   ![image](https://github.com/user-attachments/assets/aed129c2-3cea-4482-879f-b2d5c463f786)
+
+5. Marcar tareas como completadas (eliminarlas de la lista).
+   ´´´bash
+   ZREM tareas "Revisar correos"
+   ´´´
+   ![image](https://github.com/user-attachments/assets/5e1b25ac-1ebd-437e-8536-cd14c66873ca)
+
+
