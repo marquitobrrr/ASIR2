@@ -1,17 +1,17 @@
 <?php
+require 'db.php';
 session_start();
 
+use Predis\Client;
+
 // Conexión a la base de datos
-$servername = "localhost";
-$username = "root";
-$password = "232425";
-$dbname = "Agricultura";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
+$conn = new mysqli('localhost', 'root', '', 'Agricultura');
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
+
+// Conexión a Redis
+$redis = new Client();
 
 function getVareadores($conn, $redis) {
     $cacheKey = 'vareadores';
