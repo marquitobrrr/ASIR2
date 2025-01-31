@@ -1,11 +1,8 @@
 <?php
-session_start();
-
-// Conexión a la base de datos
 $servername = "localhost";
 $username = "root";
 $password = "232425";
-$dbname = "Agricultura";
+$dbname = "BD_GAMES";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -13,91 +10,96 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-function getVareadores($conn, $redis) {
-    $cacheKey = 'vareadores';
-    if ($redis->exists($cacheKey)) {
-        return json_decode($redis->get($cacheKey), true);
-    }
-    $result = $conn->query("SELECT * FROM Vareadores");
-    $vareadores = $result->fetch_all(MYSQLI_ASSOC);
-    $redis->setex($cacheKey, 60, json_encode($vareadores)); // 60 segundos
-    return $vareadores;
-}
+$gamesCount = $conn->query("SELECT COUNT(*) FROM GAMES")->fetch_row()[0];
+$playersCount = $conn->query("SELECT COUNT(*) FROM PLAYERS")->fetch_row()[0];
+$matchesCount = $conn->query("SELECT COUNT(*) FROM MATCHES")->fetch_row()[0];
 
-function getOlivos($conn, $redis) {
-    $cacheKey = 'olivos';
-    if ($redis->exists($cacheKey)) {
-        return json_decode($redis->get($cacheKey), true);
-    }
-    $result = $conn->query("SELECT * FROM Olivos");
-    $olivos = $result->fetch_all(MYSQLI_ASSOC);
-    $redis->setex($cacheKey, 60, json_encode($olivos)); // 60 segundos
-    return $olivos;
-}
+$playersIn2Matches = $conn->query("SELECT COUNT(DISTINCT ID_PLAYER1) FROM MATCHES GROUP BY ID_PLAYER1 HAVING COUNT(ID_PLAYER1) = 2")->fetch_row()[0];
+$playersIn3Matches = $conn->query("SELECT COUNT(DISTINCT ID_PLAYER1) FROM MATCHES GROUP BY ID_PLAYER1 HAVING COUNT(ID_PLAYER1) = 3")->fetch_row()[0];
+$playersInMoreThan3Matches = $conn->query("SELECT COUNT(DISTINCT ID_PLAYER1) FROM MATCHES GROUP BY ID_PLAYER1 HAVING COUNT(ID_PLAYER1) > 3")->fetch_row()[0];
 
-// Agregar un Vareador
-if (isset($_POST['add_vareador'])) {
-    $nombre = $_POST['nombre'];
-    $stmt = $conn->prepare("INSERT INTO Vareadores (nombre) VALUES (?)");
-    $stmt->bind_param("s", $nombre);
-    $stmt->execute();
-    $redis->del('vareadores'); // Invalida la caché
-    header("Location: index.php");
-}
-
-// Agregar un Olivo
-if (isset($_POST['add_olivo'])) {
-    $ubicacion = $_POST['ubicacion'];
-    $stmt = $conn->prepare("INSERT INTO Olivos (ubicacion) VALUES (?)");
-    $stmt->bind_param("s", $ubicacion);
-    $stmt->execute();
-    $redis->del('olivos'); // Invalida la caché
-    header("Location: index.php");
-}
+$conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Vareadores y Olivos</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Página Inicial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #333;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: inline-block;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>Gestión de Vareadores y Olivos</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <h3>Vareadores</h3>
-                <form method="POST">
-                    <input type="text" name="nombre" placeholder="Nombre del Vareador" class="form-control" required>
-                    <button type="submit" name="add_vareador" class="btn btn-primary mt-2">Agregar</button>
-                </form>
-                <ul class="list-group mt-3">
-                    <?php foreach (getVareadores($conn, $redis) as $vareador): ?>
-                        <li class="list-group-item">
-                            <?= htmlspecialchars($vareador['nombre']) ?>
-                            <a href="delete.php?type=vareador&id=<?= $vareador['id'] ?>" class="btn btn-danger btn-sm float-end">Eliminar</a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-            <div class="col-md-6">
-                <h3>Olivos</h3>
-                <form method="POST">
-                    <input type="text" name="ubicacion" placeholder="Ubicación del Olivo" class="form-control" required>
-                    <button type="submit" name="add_olivo" class="btn btn-primary mt-2">Agregar</button>
-                </form>
-                <ul class="list-group mt-3">
-                    <?php foreach (getOlivos($conn, $redis) as $olivo): ?>
-                        <li class="list-group-item">
-                            <?= htmlspecialchars($olivo['ubicacion']) ?>
-                            <a href="delete.php?type=olivo&id=<?= $olivo['id'] ?>" class="btn btn-danger btn-sm float-end">Eliminar</a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        </div>
+    <header>
+        <h1>Página de Gestión de Juegos</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="players.php">Gestionar Jugadores</a></li>
+            <li><a href="games.php">Gestionar Juegos</a></li>
+            <li><a href="matches.php">Gestionar Partidas</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Resumen de Control</h2>
+        <p><strong>Número de juegos:</strong> <?php echo $gamesCount; ?></p>
+        <p><strong>Número de jugadores:</strong> <?php echo $playersCount; ?></p>
+        <p><strong>Número de partidas:</strong> <?php echo $matchesCount; ?></p>
+        <p><strong>Jugadores jugando en 2 partidas:</strong> <?php echo $playersIn2Matches; ?></p>
+        <p><strong>Jugadores jugando en 3 partidas:</strong> <?php echo $playersIn3Matches; ?></p>
+        <p><strong>Jugadores jugando en más de 3 partidas:</strong> <?php echo $playersInMoreThan3Matches; ?></p>
     </div>
 </body>
 </html>
