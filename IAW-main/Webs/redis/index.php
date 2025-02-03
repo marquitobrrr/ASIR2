@@ -20,6 +20,7 @@ session_start();
                     <li class="list-group-item"><a href="add_olivo.php" class="btn btn-primary">Agregar Olivo</a></li>
                     <li class="list-group-item"><a href="list_vareadores.php" class="btn btn-success">Ver Vareadores</a></li>
                     <li class="list-group-item"><a href="list_olivo.php" class="btn btn-success">Ver Olivos</a></li>
+                    <li class="list-group-item"><a href="asignar_olivo.php" class="btn btn-danger"></a>Asignar olivo a vareador</li>
                 </ul>
             </div>
         </div>

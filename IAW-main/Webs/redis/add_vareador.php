@@ -1,39 +1,21 @@
 <?php
 require 'db.php';
 
-// Verifica conexiones
-if (!isset($conn)) {
-    die("Error: La conexión a la base de datos no está definida.");
-}
-if (!isset($redis)) {
-    die("Error: La conexión a Redis no está definida.");
-}
-echo "Conexión exitosa a la base de datos y Redis.<br>";
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nombre = trim($_POST['nombre']);
+    $nombre = $_POST['nombre'];
+    $stmt = $conn->prepare("INSERT INTO Vareadores (nombre) VALUES (?)");
+    $stmt->bind_param("s", $nombre);
+    $stmt->execute();
 
-    if (!empty($nombre)) {
-        // Generar un ID temporal único
-        $temp_id = "temp_vareador_" . uniqid();
+    // Invalidar la caché de Vareadores en Redis
+    $redis->del('vareadores_list');
 
-        // Guardar en Redis con TTL de 60 segundos
-        $redis->setex($temp_id, 60, json_encode(['nombre' => $nombre]));
-
-        echo "Vareador almacenado en Redis con TTL de 60 segundos.<br>";
-
-        header("Location: list_vareadores.php");
-        exit;
-    } else {
-        echo "El nombre no puede estar vacío.<br>";
-    }
+    header("Location: index.php");
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
     <title>Agregar Vareador</title>
 </head>
 <body>
