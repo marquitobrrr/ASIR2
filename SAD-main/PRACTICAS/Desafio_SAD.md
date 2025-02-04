@@ -24,6 +24,11 @@ Incluye:
 | **Servidor Proxy** | LAN | 192.168.0.10/24 |
 | **Cliente Interno** | LAN | 192.168.0.100/24 |
 
+### Configuracion adaptador de red WAN para el Firewall externo.
+![image](https://github.com/user-attachments/assets/d4068220-7b6c-4001-833a-55cd907816b8)
+
+![image](https://github.com/user-attachments/assets/dc63ce18-230c-4319-a066-08e5f9f4985b)
+
 ## Configuración de VirtualBox para cada Máquina
 
 ### 1. Firewall Externo (FW1 - pfSense)
