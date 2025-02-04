@@ -1,21 +1,17 @@
 <?php
 require 'db.php';
 
-// Clave de caché
 $cacheKey = 'olivos_list';
 
-// Verificar si los datos están en Redis
 $olivos = getFromRedisCache($redis, $cacheKey);
 
 if (!$olivos) {
-    // Si no está en caché, consulta la base de datos
     $result = $conn->query("SELECT * FROM Olivos");
     if (!$result) {
         die("Error en la consulta: " . $conn->error);
     }
     $olivos = $result->fetch_all(MYSQLI_ASSOC);
 
-    // Guardar en Redis con TTL
     setRedisCache($redis, $cacheKey, $olivos, false);
 }
 ?>
@@ -23,24 +19,45 @@ if (!$olivos) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Olivos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body>
-    <h2>Olivos</h2>
-    <ul>
-        <?php 
-        if (count($olivos) > 0) {
-            foreach ($olivos as $row) {
-                echo "<li>" . htmlspecialchars($row['ubicacion']) . " ";
-                echo "<a href='delete.php?type=olivo&id=" . $row['id'] . "'>Eliminar</a>";
-                echo "<a href='list_vareadores_olivo.php?olivo_id=" . $row['id'] . "'>Ver Vareadores</a>";
-                echo "</li>";
-            }
-        } else {
-            echo "<li>No hay olivos registrados.</li>";
-        }
-        ?>
-    </ul>
-    <a href="index.php">Volver</a>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow-lg p-4">
+            <h2 class="text-center text-primary mb-4">Lista de Olivos</h2>
+            
+            <?php if (count($olivos) > 0): ?>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Ubicación</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($olivos as $row): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($row['ubicacion']) ?></td>
+                                    <td>
+                                        <a href="delete.php?type=olivo&id=<?= $row['id'] ?>" class="btn btn-danger btn-sm">Eliminar</a>
+                                        <a href="list_vareadores_olivo.php?olivo_id=<?= $row['id'] ?>" class="btn btn-info btn-sm">Ver Vareadores</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php else: ?>
+                <div class="alert alert-warning text-center">No hay olivos registrados.</div>
+            <?php endif; ?>
+
+            <div class="text-center mt-3">
+                <a href="index.php" class="btn btn-secondary">Volver</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
