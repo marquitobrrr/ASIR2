@@ -100,11 +100,16 @@ Incluye:
 - CPU: `1 vCPU`
 - Disco duro: `10 GB (Dinámicamente asignado)`
 - Sistema operativo: `Ubuntu Server 22.04 ISO o similar.`
+  
+### Instalacion Ubuntu Server
+![image](https://github.com/user-attachments/assets/e6081c35-b813-43b5-92fc-4f59d73d3101)
+![image](https://github.com/user-attachments/assets/974c3d84-8cdd-4796-bc58-9da4d135fc2f)
 
 #### Configuración de Red
 - **Adaptador 1 (DMZ):**
   - Tipo: `Red Interna`
   - Nombre de la red interna: `DMZ`
+    ![image](https://github.com/user-attachments/assets/59295122-0a28-47cf-baed-a936728799db)
 
 ### 4. Servidor Proxy (Squid en Ubuntu Server o Similar)
 #### Configuración General
