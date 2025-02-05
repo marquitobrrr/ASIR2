@@ -24,12 +24,10 @@ Incluye:
 | **Servidor Proxy** | LAN | 192.168.0.10/24 |
 | **Cliente Interno** | LAN | 192.168.0.100/24 |
 
-### Configuracion adaptador de red WAN para el Firewall externo.
-![image](https://github.com/user-attachments/assets/d4068220-7b6c-4001-833a-55cd907816b8)
 
-![image](https://github.com/user-attachments/assets/dc63ce18-230c-4319-a066-08e5f9f4985b)
+# Configuración de VirtualBox para cada Máquina
 
-## Configuración de VirtualBox para cada Máquina
+## Firewal
 
 ### 1. Firewall Externo (FW1 - pfSense)
 #### Configuración General
@@ -38,16 +36,38 @@ Incluye:
 - CPU: `1 vCPU`
 - Disco duro: `8 GB (Dinámicamente asignado)`
 - Sistema operativo: `pfSense ISO, FreeBSD 64-bit`
+  ### Configuracion adaptador de red WAN para el Firewall externo.
+![image](https://github.com/user-attachments/assets/d4068220-7b6c-4001-833a-55cd907816b8)
+
+![image](https://github.com/user-attachments/assets/dc63ce18-230c-4319-a066-08e5f9f4985b)
+
+### Instalacion Pfsense
+
+![image](https://github.com/user-attachments/assets/73535629-ba26-4b12-8cab-beed8a02c4d3)
+
+![image](https://github.com/user-attachments/assets/2fbdc4cf-269d-4f81-ae61-e4dc398dbcc7)
+
+![image](https://github.com/user-attachments/assets/c30ae39a-149e-4e42-bcbc-465912f62028)
+
+![image](https://github.com/user-attachments/assets/97811bbc-7457-413a-a645-85425fb2666f)
+
+![image](https://github.com/user-attachments/assets/90cf7a1b-f621-4080-a107-751765a7a2fa)
+
+![image](https://github.com/user-attachments/assets/f5fe1641-e31a-4dfc-beab-ef7cdcfc9963)
 
 #### Configuración de Red
 - **Adaptador 1 (WAN):**
   - Tipo: `Red NAT`
   - Propósito: `Conexión a Internet.`
+    ![image](https://github.com/user-attachments/assets/dc63ce18-230c-4319-a066-08e5f9f4985b)
 - **Adaptador 2 (DMZ):**
   - Tipo: `Red Interna`
   - Nombre de la red interna: `DMZ`
+    ![image](https://github.com/user-attachments/assets/2147493e-589b-4120-8ec7-5a4ec94be6fb)
 
-Asegúrate de que la ISO de pfSense esté seleccionada como medio de inicio en la configuración del almacenamiento.
+
+
+![image](https://github.com/user-attachments/assets/b946d70c-f752-402b-9c91-4cd2ea4d1841)
 
 ### 2. Firewall Interno (FW2 - pfSense)
 #### Configuración General
@@ -61,9 +81,17 @@ Asegúrate de que la ISO de pfSense esté seleccionada como medio de inicio en l
 - **Adaptador 1 (DMZ):**
   - Tipo: `Red Interna`
   - Nombre de la red interna: `DMZ`
+    ![image](https://github.com/user-attachments/assets/d0a889d9-bc13-4722-be87-ab35b0fb772e)
+
 - **Adaptador 2 (LAN):**
   - Tipo: `Red Interna`
   - Nombre de la red interna: `LAN`
+    ![image](https://github.com/user-attachments/assets/749ade52-fe45-473c-b3fc-0f51a50ebeb8)
+
+
+
+![image](https://github.com/user-attachments/assets/53709f52-96c7-4bf7-8c31-4b29b21f59fb)
+
 
 ### 3. Servidor VPN (Ubuntu Server o Similar)
 #### Configuración General
