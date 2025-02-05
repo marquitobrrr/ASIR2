@@ -102,14 +102,18 @@ Incluye:
 - Sistema operativo: `Ubuntu Server 22.04 ISO o similar.`
   
 ### Instalacion Ubuntu Server
-![image](https://github.com/user-attachments/assets/e6081c35-b813-43b5-92fc-4f59d73d3101)
 ![image](https://github.com/user-attachments/assets/974c3d84-8cdd-4796-bc58-9da4d135fc2f)
+![image](https://github.com/user-attachments/assets/8ebed20c-4814-46c0-abb7-36aa00515e34)
+![image](https://github.com/user-attachments/assets/59295122-0a28-47cf-baed-a936728799db)
+![image](https://github.com/user-attachments/assets/518fc3e6-b3b0-4324-83da-9813c3dc52b5)
+
 
 #### Configuración de Red
 - **Adaptador 1 (DMZ):**
   - Tipo: `Red Interna`
   - Nombre de la red interna: `DMZ`
-    ![image](https://github.com/user-attachments/assets/59295122-0a28-47cf-baed-a936728799db)
+    
+    ![image](https://github.com/user-attachments/assets/b15162bf-e705-4f71-876a-83a9de5725ef)
 
 ### 4. Servidor Proxy (Squid en Ubuntu Server o Similar)
 #### Configuración General
@@ -119,10 +123,18 @@ Incluye:
 - Disco duro: `10 GB (Dinámicamente asignado)`
 - Sistema operativo: `Ubuntu Server 22.04 ISO o similar.`
 
+### Instalacion Ubuntu Server
+![image](https://github.com/user-attachments/assets/6879f07c-bb31-4b42-826b-9fc3a2b667aa)
+![image](https://github.com/user-attachments/assets/87f475af-4bb9-42ee-bf04-c3d9c5897916)
+![image](https://github.com/user-attachments/assets/616f07e2-c9c1-44ef-a91b-5b2385548dba)
+![image](https://github.com/user-attachments/assets/fe81841d-9fb2-4a6b-83ed-ce6ece796431)
+
+
 #### Configuración de Red
 - **Adaptador 1 (LAN):**
   - Tipo: `Red Interna`
   - Nombre de la red interna: `LAN`
+![image](https://github.com/user-attachments/assets/f088e837-c6e9-486b-9203-76b7698660fd)
 
 ### 5. Cliente Interno
 #### Configuración General
@@ -131,11 +143,19 @@ Incluye:
 - CPU: `1 vCPU`
 - Disco duro: `8 GB (Dinámicamente asignado)`
 - Sistema operativo: `Windows 7/10/11.`
+  
+### Instalacion Windows 7
+![image](https://github.com/user-attachments/assets/4c1b94bf-ed4c-4918-a803-40ce0105e246)
+![image](https://github.com/user-attachments/assets/35c13de9-f410-416b-ba26-ae31babcf9b9)
+![image](https://github.com/user-attachments/assets/76439e8d-f69d-4b34-a9dd-1dbf382d456e)
+
 
 #### Configuración de Red
 - **Adaptador 1 (LAN):**
   - Tipo: `Red Interna`
   - Nombre de la red interna: `LAN`
+    ![image](https://github.com/user-attachments/assets/26db3e5d-08dc-4f09-979d-80207aaac786)
+
 
 ### Redes Internas en VirtualBox
 Para conectar las máquinas correctamente:
