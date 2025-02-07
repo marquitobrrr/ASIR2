@@ -1,8 +1,5 @@
-## Commits y Actualización del Portfolio
-
-- Haz commit en cada clase con el comentario: `[clase] 'tarea realizada'`
-- Lo que trabajes en casa haz commit al terminar con el comentario: `[casa] 'tarea realizada'`
-- Rellena el portfolio Wix con tu feedback del desafío.
+# DESAFIO_SAD
+![image](https://github.com/user-attachments/assets/7da08c0d-1f34-4729-8638-19c9c01b09fb)
 
 ## Implementación de la Arquitectura del Diagrama
 
@@ -177,3 +174,299 @@ Para conectar las máquinas correctamente:
 | **Cliente Interno** | LAN | Red Interna | LAN |
 
 ... (El contenido continúa con las configuraciones de firewall, Squid, VPN y pruebas de conectividad según lo descrito en el texto original.)
+
+
+# Configuración de Firewalls con pfSense
+
+## 1. Configuración del Firewall Externo (FW1)
+
+### Reglas de Firewall (WAN y DMZ)
+
+#### Permitir acceso al servidor VPN en la DMZ:
+- **Interfaz:** WAN  
+- **Proto:** UDP  
+- **Puerto:** 1194  
+- **Destino:** 192.168.1.10 
+
+```bash
+pfctl -t WAN -T add pass in on WAN proto udp from any to 192.168.1.10 port 1194
+```
+![image](https://github.com/user-attachments/assets/b15c8495-82e8-4efa-b05b-0dca74730791)
+
+#### Permitir tráfico desde DMZ hacia Internet:
+- **Interfaz:** DMZ  
+- **Proto:** TCP/UDP  
+- **Puerto:** Any  
+- **Destino:** Any  
+
+```bash
+pfctl -t DMZ -T add pass out on DMZ proto { tcp udp } from any to any
+```
+![image](https://github.com/user-attachments/assets/477d2cea-496b-497c-a658-c93ee5a1ff60)
+![image](https://github.com/user-attachments/assets/fbb3222d-6fc6-4f6c-a820-3047d845594f)
+
+#### Bloquear tráfico directo de DMZ a LAN (excepto VPN a Proxy):
+- **Interfaz:** DMZ  
+- **Proto:** Any  
+- **Destino:** 192.168.0.0/24  
+- **Acción:** Block  
+- **Excepción:** 192.168.1.10 -> 192.168.0.10  
+
+### NAT en FW1
+- **Outbound NAT:** Habilita NAT automático o manual.  
+- **Regla NAT:** Traduce `192.168.1.0/24` → WAN (masquerade).  
+
+## 1.2. Configuración del Firewall Interno (FW2)
+
+### Reglas de Firewall (DMZ y LAN)
+
+#### Permitir tráfico del Proxy a Internet:
+- **Interfaz:** LAN  
+- **Proto:** TCP  
+- **Origen:** 192.168.0.10  
+- **Destino:** Any  
+- **Puerto:** 80, 443  
+
+#### Permitir tráfico de Cliente Interno al Proxy (3128):
+- **Interfaz:** LAN  
+- **Proto:** TCP  
+- **Origen:** 192.168.0.0/24  
+- **Destino:** 192.168.0.10  
+- **Puerto:** 3128  
+
+#### Permitir tráfico de la VPN al Proxy:
+- **Interfaz:** DMZ  
+- **Proto:** TCP  
+- **Origen:** 192.168.1.10  
+- **Destino:** 192.168.0.10  
+- **Puerto:** 3128  
+
+#### Bloquear tráfico directo de DMZ a LAN (excepto VPN a Proxy):
+- **Interfaz:** DMZ  
+- **Proto:** Any  
+- **Destino:** 192.168.0.0/24  
+- **Acción:** Block  
+- **Excepción:** 192.168.1.10 -> 192.168.0.10  
+
+### NAT en FW2
+- **Outbound NAT:** Automático.  
+
+---
+
+## 2. Instalación y Configuración del Servidor Proxy (Squid)
+
+### 2.1. Instalación de Squid
+
+**Sistema Operativo:** Ubuntu Server 22.04 o similar.
+
+Actualizar el sistema:
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+Instalar Squid:
+```bash
+sudo apt install squid -y
+```
+
+### 2.2. Configuración de Squid
+
+Abre el archivo de configuración:
+```bash
+sudo nano /etc/squid/squid.conf
+```
+
+Realiza las siguientes modificaciones:
+
+**Definir las redes permitidas:** Agrega las ACLs para la red interna y la VPN.
+```bash
+acl localnet src 192.168.0.0/24
+acl vpnnet src 192.168.1.10/24
+```
+
+```bash
+http_access allow localnet
+http_access allow vpnnet
+http_access deny all
+```
+
+**Configurar el puerto del Proxy:** Asegúrate de que Squid escucha en el puerto 3128.
+```bash
+http_port 3128
+```
+
+**Habilitar el acceso anónimo (opcional):** Si no necesitas autenticación, asegúrate de que no haya reglas de autenticación configuradas.
+
+### Configuración de Bloqueo de Páginas Web
+
+Crea una lista negra de URLs prohibidas:
+
+Abre un archivo para definir las páginas bloqueadas:
+```bash
+sudo nano /etc/squid/blacklist.txt
+```
+
+Añade los dominios o URLs que deseas bloquear (uno por línea):
+```plaintext
+facebook.com
+youtube.com
+twitter.com
+```
+
+Guarda y cierra el archivo.
+
+**Configurar Squid para usar la lista negra:**
+
+Edita el archivo principal de configuración de Squid:
+```bash
+sudo nano /etc/squid/squid.conf
+```
+
+Añade una ACL (Access Control List) para la lista negra:
+```bash
+acl blocked_sites dstdomain "/etc/squid/blacklist.txt"
+http_access deny blocked_sites
+```
+
+Coloca esta regla antes de la línea `http_access allow localnet` para que tenga prioridad.
+
+Reinicia el servicio de Squid:
+```bash
+sudo systemctl restart squid
+```
+
+## 2.3. Configuración de Restricciones de Tiempo
+
+Puedes permitir o bloquear el acceso en horarios específicos para determinados usuarios o redes.
+
+**Define las horas permitidas o bloqueadas:**
+
+Edita el archivo de configuración de Squid:
+```bash
+sudo nano /etc/squid/squid.conf
+```
+
+Define un rango de tiempo usando `time ACLs`. Por ejemplo:
+```bash
+acl working_hours time MTWHF 08:00-18:00
+```
+
+Esto define un rango de tiempo de lunes a viernes (MTWHF) de 08:00 a 18:00.
+
+**Aplica restricciones basadas en tiempo:**
+
+Combina la ACL de tiempo con una red o usuarios específicos:
+```bash
+http_access allow localnet working_hours
+http_access deny localnet !working_hours
+```
+
+Esto permite el acceso solo durante el horario laboral y lo bloquea fuera de este.
+
+Reinicia el servicio de Squid:
+```bash
+sudo systemctl restart squid
+```
+
+## 3. Combinación de Restricciones de Páginas y Tiempo
+
+Puedes combinar las ACLs de tiempo y páginas bloqueadas para aplicar reglas específicas.
+
+Por ejemplo, bloquear YouTube fuera del horario laboral:
+```bash
+acl youtube dstdomain .youtube.com
+acl working_hours time MTWHF 08:00-18:00
+http_access deny youtube !working_hours
+```
+
+## 4. Configuración del Cliente Interno
+
+Configura el cliente para usar el Proxy:
+
+**En el navegador:**
+- Proxy HTTP: `192.168.0.10`
+- Puerto: `3128`
+
+Verifica el acceso a Internet desde el cliente.
+
+## 5. Pruebas de Conectividad
+
+### Pruebas del Proxy (Squid)
+
+**a) Verifica conectividad desde el cliente interno (192.168.0.100)**
+
+Prueba la navegación:
+```bash
+Accede a https://www.google.com
+```
+
+**Resultado esperado:** El acceso debe ser exitoso.
+
+**Logs del Proxy:**
+```bash
+sudo tail -f /var/log/squid/access.log
+```
+
+**b) Bloqueo de sitios configurados en Squid**
+
+Intenta acceder a un sitio bloqueado:
+```bash
+Accede a https://www.facebook.com
+```
+
+**Resultado esperado:** El acceso debe ser rechazado.
+
+Verifica los logs del Proxy:
+```bash
+grep facebook /var/log/squid/access.log
+```
+
+**c) Restricciones de tiempo**
+
+Intenta acceder a Internet fuera del horario permitido:
+```bash
+sudo tail -f /var/log/squid/access.log
+```
+
+## 6. Pruebas de Seguridad
+
+### Acceso desde la DMZ a la red interna
+
+Desde el servidor VPN (192.168.1.10) en la DMZ, intenta acceder al cliente interno:
+```bash
+ping 192.168.0.100
+```
+
+**Resultado esperado:** El tráfico debe estar bloqueado.
+
+Intenta conectarte por SSH al Proxy:
+```bash
+ssh usuario@192.168.0.10
+```
+
+**Resultado esperado:** El acceso debe estar permitido si está configurado en el Firewall.
+
+**Verificación del tráfico Proxy:**
+```bash
+sudo tail -f /var/log/squid/access.log
+```
+
+Filtra solicitudes específicas:
+```bash
+grep google /var/log/squid/access.log
+```
+
+**Traceroute completo:**
+```bash
+traceroute 8.8.8.8
+```
+
+**Resultado esperado:** El tráfico debe pasar por el Proxy.
+
+**Prueba de DNS:**
+```bash
+nslookup www.google.com
+```
+
+**Resultado esperado:** La resolución debe ser exitosa.
+
