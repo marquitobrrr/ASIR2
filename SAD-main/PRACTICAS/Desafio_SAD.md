@@ -182,28 +182,15 @@ Para conectar las máquinas correctamente:
 
 ### Reglas de Firewall (WAN y DMZ)
 
-#### Permitir acceso al servidor VPN en la DMZ:
-- **Interfaz:** WAN  
-- **Proto:** UDP  
-- **Puerto:** 1194  
-- **Destino:** 192.168.1.10 
-
-```bash
-pfctl -t WAN -T add pass in on WAN proto udp from any to 192.168.1.10 port 1194
-```
-![image](https://github.com/user-attachments/assets/b15c8495-82e8-4efa-b05b-0dca74730791)
-
 #### Permitir tráfico desde DMZ hacia Internet:
 - **Interfaz:** DMZ  
 - **Proto:** TCP/UDP  
 - **Puerto:** Any  
 - **Destino:** Any  
 
-```bash
-pfctl -t DMZ -T add pass out on DMZ proto { tcp udp } from any to any
-```
-![image](https://github.com/user-attachments/assets/477d2cea-496b-497c-a658-c93ee5a1ff60)
-![image](https://github.com/user-attachments/assets/fbb3222d-6fc6-4f6c-a820-3047d845594f)
+![image](https://github.com/user-attachments/assets/d67ec968-f18c-4517-9cea-632a17dc5581)
+![image](https://github.com/user-attachments/assets/96093b5d-7944-4b40-9ce2-354bcd5b868a)
+
 
 #### Bloquear tráfico directo de DMZ a LAN (excepto VPN a Proxy):
 - **Interfaz:** DMZ  
@@ -211,10 +198,16 @@ pfctl -t DMZ -T add pass out on DMZ proto { tcp udp } from any to any
 - **Destino:** 192.168.0.0/24  
 - **Acción:** Block  
 - **Excepción:** 192.168.1.10 -> 192.168.0.10  
+![image](https://github.com/user-attachments/assets/a12f7fd9-095f-4ae8-897a-f06a299bb94c)
+![image](https://github.com/user-attachments/assets/9bf3c420-df71-4e70-ad1f-10ed7fd96adb)
+
 
 ### NAT en FW1
 - **Outbound NAT:** Habilita NAT automático o manual.  
-- **Regla NAT:** Traduce `192.168.1.0/24` → WAN (masquerade).  
+- **Regla NAT:** Traduce `192.168.1.0/24` → WAN (masquerade).
+   
+![image](https://github.com/user-attachments/assets/7be4339a-9341-428c-b0f1-4658238ee825)
+
 
 ## 1.2. Configuración del Firewall Interno (FW2)
 
@@ -226,6 +219,9 @@ pfctl -t DMZ -T add pass out on DMZ proto { tcp udp } from any to any
 - **Origen:** 192.168.0.10  
 - **Destino:** Any  
 - **Puerto:** 80, 443  
+![image](https://github.com/user-attachments/assets/ae1399c5-6505-43a5-9fe8-0e51d29f3160)
+![image](https://github.com/user-attachments/assets/56fd46ca-ac83-4dd1-9219-fd82acb81a79)
+
 
 #### Permitir tráfico de Cliente Interno al Proxy (3128):
 - **Interfaz:** LAN  
@@ -233,13 +229,9 @@ pfctl -t DMZ -T add pass out on DMZ proto { tcp udp } from any to any
 - **Origen:** 192.168.0.0/24  
 - **Destino:** 192.168.0.10  
 - **Puerto:** 3128  
+![image](https://github.com/user-attachments/assets/281e9a68-3c46-4ef3-ab04-48150967b90f)
+![image](https://github.com/user-attachments/assets/a49415dd-9ad4-4cf3-8917-92629342cc53)
 
-#### Permitir tráfico de la VPN al Proxy:
-- **Interfaz:** DMZ  
-- **Proto:** TCP  
-- **Origen:** 192.168.1.10  
-- **Destino:** 192.168.0.10  
-- **Puerto:** 3128  
 
 #### Bloquear tráfico directo de DMZ a LAN (excepto VPN a Proxy):
 - **Interfaz:** DMZ  
@@ -247,9 +239,12 @@ pfctl -t DMZ -T add pass out on DMZ proto { tcp udp } from any to any
 - **Destino:** 192.168.0.0/24  
 - **Acción:** Block  
 - **Excepción:** 192.168.1.10 -> 192.168.0.10  
+![image](https://github.com/user-attachments/assets/1cf5eca1-89ea-4690-95b5-18818c201179)
+![image](https://github.com/user-attachments/assets/73668b9f-5dd7-4e9a-96e5-987c2e091915)
 
 ### NAT en FW2
 - **Outbound NAT:** Automático.  
+![image](https://github.com/user-attachments/assets/f9d80d52-b3fa-4c65-9d02-e7704622dd7c)
 
 ---
 
