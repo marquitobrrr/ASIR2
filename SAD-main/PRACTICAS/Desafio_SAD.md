@@ -381,8 +381,9 @@ Configura el cliente para usar el Proxy:
 **En el navegador:**
 - Proxy HTTP: `192.168.0.10`
 - Puerto: `3128`
+![image](https://github.com/user-attachments/assets/08bcc3ea-fdfd-4d8c-be3a-add97b13269e)
 
-Verifica el acceso a Internet desde el cliente.
+![image](https://github.com/user-attachments/assets/c5b487d1-9022-441d-a16c-ce582d53ac4d)
 
 ## 5. Pruebas de Conectividad
 
