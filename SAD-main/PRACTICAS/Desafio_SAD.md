@@ -258,11 +258,13 @@ Actualizar el sistema:
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
+![image](https://github.com/user-attachments/assets/7173cd3f-8478-4178-b6a7-1ee60b66a437)
 
 Instalar Squid:
 ```bash
 sudo apt install squid -y
 ```
+![image](https://github.com/user-attachments/assets/de191aa7-b77d-4867-9ef8-1f10f0a38443)
 
 ### 2.2. Configuración de Squid
 
@@ -292,6 +294,69 @@ http_port 3128
 
 **Habilitar el acceso anónimo (opcional):** Si no necesitas autenticación, asegúrate de que no haya reglas de autenticación configuradas.
 
+## ARCHIVO DE CONFIGURACION.
+
+```bash
+# ===============================
+# CONFIGURACIÓN BÁSICA DE SQUID
+# ===============================
+
+# Configurar el puerto en el que escucha Squid (puerto estándar 3128)
+http_port 3128
+
+# ===============================
+# DEFINIR LAS REDES PERMITIDAS
+# ===============================
+
+# Definir redes internas permitidas (LAN y VPN)
+acl localnet src 192.168.0.0/24   # Red LAN
+acl vpnnet src 192.168.1.10/24    # Red VPN (IP específica)
+
+# ===============================
+# REGLAS DE ACCESO
+# ===============================
+
+# Permitir acceso solo a las redes definidas
+http_access allow localnet
+http_access allow vpnnet
+
+# Denegar acceso a todos los demás
+http_access deny all
+
+# ===============================
+# CONFIGURACIÓN DEL LOGGING
+# ===============================
+
+# Configurar registros de acceso (logs) en formato estándar
+access_log /var/log/squid/access.log squid
+
+# ===============================
+# CONFIGURACIÓN DEL CACHÉ (Opcional)
+# ===============================
+
+# Habilitar caché con 100 MB de espacio en disco
+cache_dir ufs /var/spool/squid 100 16 256
+cache_mem 64 MB
+maximum_object_size 4 MB
+cache_replacement_policy heap LFUDA
+
+# ===============================
+# CONFIGURACIÓN ADICIONAL
+# ===============================
+
+# Permitir conexiones persistentes
+client_persistent_connections on
+server_persistent_connections on
+
+# Evitar errores de DNS (ajustar según el servidor DNS configurado)
+dns_nameservers 8.8.8.8 8.8.4.4
+
+# ===============================
+# FIN DEL ARCHIVO
+# ===============================
+
+```
+
 ### Configuración de Bloqueo de Páginas Web
 
 Crea una lista negra de URLs prohibidas:
@@ -307,6 +372,7 @@ facebook.com
 youtube.com
 twitter.com
 ```
+![image](https://github.com/user-attachments/assets/be769b8e-dbd5-489b-855c-b2e187737c67)
 
 Guarda y cierra el archivo.
 
@@ -322,6 +388,70 @@ Añade una ACL (Access Control List) para la lista negra:
 acl blocked_sites dstdomain "/etc/squid/blacklist.txt"
 http_access deny blocked_sites
 ```
+```bash
+# ================================
+# CONFIGURACIÓN GENERAL DE SQUID
+# ================================
+
+# Puerto en el que escucha Squid
+http_port 3128
+
+# ================================
+# DEFINIR LAS REDES PERMITIDAS
+# ================================
+acl localnet src 192.168.0.0/24   # Red LAN
+acl vpnnet src 192.168.1.10/24    # Red VPN (IP específica)
+
+# ================================
+# CONFIGURACIÓN DE LA LISTA NEGRA
+# ================================
+acl blocked_sites dstdomain "/etc/squid/blacklist.txt"
+http_access deny blocked_sites
+
+# ================================
+# REGLAS DE ACCESO
+# ================================
+
+# Permitir acceso solo a las redes definidas
+http_access allow localnet
+http_access allow vpnnet
+
+# Denegar todo el tráfico que no está explícitamente permitido
+http_access deny all
+
+# ================================
+# CONFIGURACIÓN DEL LOGGING
+# ================================
+
+# Configurar registros de acceso (logs)
+access_log /var/log/squid/access.log squid
+
+# ================================
+# CONFIGURACIÓN DEL CACHÉ (Opcional)
+# ================================
+
+# Habilitar caché con 100 MB de espacio en disco
+cache_dir ufs /var/spool/squid 100 16 256
+cache_mem 64 MB
+maximum_object_size 4 MB
+cache_replacement_policy heap LFUDA
+
+# ================================
+# CONFIGURACIÓN DE CONEXIONES
+# ================================
+
+# Permitir conexiones persistentes
+client_persistent_connections on
+server_persistent_connections on
+
+# Evitar errores de DNS (ajustar según el servidor DNS configurado)
+dns_nameservers 8.8.8.8 8.8.4.4
+
+# ================================
+# FIN DEL ARCHIVO
+# ================================
+
+```
 
 Coloca esta regla antes de la línea `http_access allow localnet` para que tenga prioridad.
 
@@ -329,6 +459,7 @@ Reinicia el servicio de Squid:
 ```bash
 sudo systemctl restart squid
 ```
+![image](https://github.com/user-attachments/assets/a4d2cff0-aa3d-4ac8-bd39-4d12ce9f30ba)
 
 ## 2.3. Configuración de Restricciones de Tiempo
 
