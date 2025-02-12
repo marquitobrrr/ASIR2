@@ -529,6 +529,7 @@ Prueba la navegación:
 ```bash
 Accede a https://www.google.com
 ```
+![image](https://github.com/user-attachments/assets/b32b37e6-695b-433f-95bc-3791ac9625da)
 
 **Resultado esperado:** El acceso debe ser exitoso.
 
