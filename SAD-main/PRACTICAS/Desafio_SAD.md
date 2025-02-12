@@ -471,11 +471,11 @@ Edita el archivo de configuración de Squid:
 ```bash
 sudo nano /etc/squid/squid.conf
 ```
-
 Define un rango de tiempo usando `time ACLs`. Por ejemplo:
 ```bash
 acl working_hours time MTWHF 08:00-18:00
 ```
+![image](https://github.com/user-attachments/assets/abcf084b-17ad-4f43-8c25-cda34601712c)
 
 Esto define un rango de tiempo de lunes a viernes (MTWHF) de 08:00 a 18:00.
 
@@ -486,6 +486,7 @@ Combina la ACL de tiempo con una red o usuarios específicos:
 http_access allow localnet working_hours
 http_access deny localnet !working_hours
 ```
+![image](https://github.com/user-attachments/assets/32d22e1b-0f74-4d77-9da2-5145dbcdc68d)
 
 Esto permite el acceso solo durante el horario laboral y lo bloquea fuera de este.
 
@@ -504,6 +505,8 @@ acl youtube dstdomain .youtube.com
 acl working_hours time MTWHF 08:00-18:00
 http_access deny youtube !working_hours
 ```
+![image](https://github.com/user-attachments/assets/d6a93265-bf24-4c43-977f-f5dd6c61eb30)
+
 
 ## 4. Configuración del Cliente Interno
 
