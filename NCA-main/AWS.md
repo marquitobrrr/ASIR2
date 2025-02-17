@@ -47,3 +47,19 @@ Lee y visualiza muy a detalle todo lo que se expone, hay mucha información muy 
 ---
 
 📌 **Fuente:** *Curso Completo de Ciberseguridad Defensiva (Udemy)*
+
+
+## INTRODUCCION A AWS
+Amazon Web Services (AWS) es una plataforma de computación en la nube de Amazon que ofrece una amplia gama de servicios para empresas y desarrolladores. AWS proporciona soluciones escalables, seguras y de bajo costo para necesidades de computación, almacenamiento, bases de datos, redes, análisis de datos, inteligencia artificial, y más.
+
+Fundada en 2006, AWS revolucionó el mercado al permitir que las empresas accedieran a infraestructura de TI de manera flexible, pagando solo por lo que usan. Algunos de sus servicios más populares incluyen Amazon EC2 (servidores virtuales), Amazon S3 (almacenamiento de objetos), Amazon RDS (bases de datos), y Amazon Lambda (computación sin servidores).
+
+AWS es el líder en el mercado de la nube gracias a su innovación constante, su alcance global con centros de datos en múltiples regiones, y su amplio ecosistema de servicios que permiten a las empresas optimizar costos y acelerar su transformación digital.
+
+## CREACION CUENTA REVOLUT Y AWS
+### Cuenta Revolut 
+![image](https://github.com/user-attachments/assets/fffbdf39-b71b-41be-a882-7b6d6cd730a4)
+
+### Creacion cuenta AWS
+![image](https://github.com/user-attachments/assets/d1ea54bc-bdcb-45fd-a6f3-15b452dd4e91)
+![image](https://github.com/user-attachments/assets/32452188-69ea-4f22-a481-2568d3392392)
