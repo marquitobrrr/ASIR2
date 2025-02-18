@@ -63,3 +63,9 @@ AWS es el líder en el mercado de la nube gracias a su innovación constante, su
 ### Creacion cuenta AWS
 ![image](https://github.com/user-attachments/assets/d1ea54bc-bdcb-45fd-a6f3-15b452dd4e91)
 ![image](https://github.com/user-attachments/assets/32452188-69ea-4f22-a481-2568d3392392)
+![image](https://github.com/user-attachments/assets/437f9549-d328-47fd-b348-47f1e36ff508)
+
+### Active el acceso de IAM
+![image](https://github.com/user-attachments/assets/6ba8189e-4ae2-4655-b8e7-14dbddfed0b7)
+
+###  Seguridad de la cuenta de AWS
