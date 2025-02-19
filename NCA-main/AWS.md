@@ -69,3 +69,15 @@ AWS es el líder en el mercado de la nube gracias a su innovación constante, su
 ![image](https://github.com/user-attachments/assets/6ba8189e-4ae2-4655-b8e7-14dbddfed0b7)
 
 ###  Seguridad de la cuenta de AWS
+![image](https://github.com/user-attachments/assets/c6c812b7-be22-498e-9d67-57c68b469a69)
+
+### Creacion de usuario
+![image](https://github.com/user-attachments/assets/57a2cf9a-250c-4477-b548-2aa638bedab6)
+
+### Creacion de grupo Admins donde el usuario que acabamos de crears formara parte de él
+![image](https://github.com/user-attachments/assets/4e08d9bd-bad4-4f01-a0d8-926788ba3460)
+![image](https://github.com/user-attachments/assets/b474cd17-cad5-4690-9a0f-8506bc0496d9)
+![image](https://github.com/user-attachments/assets/ae62f100-f4c2-46c7-ae5a-8b4dd9fb94d5)
+![image](https://github.com/user-attachments/assets/265e1490-7a3b-45c2-b38e-f48e415b5f68)
+
+
