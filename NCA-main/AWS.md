@@ -145,4 +145,33 @@ Tabla de subredes
   mysql -u -admin -h database-marcoasir.cj8masiai201.eu-west-3.rds.amazonaws.com -p
   sudo yum install mysql
 ```
+---
+
+### Firewall
+#### Firewall Stateless
+##### Reglas ACL Entrada
+![image](https://github.com/user-attachments/assets/c2cb41e7-31b3-4ad7-a9b9-2c6873618b16)
+##### Reglas ACL Salida
+![image](https://github.com/user-attachments/assets/9c344f2c-d0de-4571-bc08-49283a4b8673)
+
+##### Asignar ACl a subred publica
+![image](https://github.com/user-attachments/assets/8e55ed63-90d2-44fb-bfe6-942099b411f0)
+![image](https://github.com/user-attachments/assets/d1165798-a88f-4dba-a975-43a9741482c0)
+
+#### Firewall Statefull
+##### Reglas ACL desde grupos de seguridad con acceso desde HTTP HTTPS SSH.
+###### Reglas de entrada 
+![image](https://github.com/user-attachments/assets/ab93b3db-d8e8-48fd-be00-8ccf9f4927c5)
+###### Reglas de salida
+![image](https://github.com/user-attachments/assets/ef61a9e2-83da-404a-a4c1-bf4919f13837)
+###### Grupo de seguridad
+![image](https://github.com/user-attachments/assets/309552f7-69b9-4c1b-ac0f-e07a22819133)
+![image](https://github.com/user-attachments/assets/f41a4e35-9c0c-467b-88ac-547056fbfe99)
+
+###### Asignar Grupo de Seguridad a la instancia.
+![image](https://github.com/user-attachments/assets/749b4081-d598-492f-adda-38036c6ca7eb)
+![image](https://github.com/user-attachments/assets/7b9cd918-0295-465c-9638-67fa1d178adf)
+
+![image](https://github.com/user-attachments/assets/a0f25983-6bb1-44e9-af78-c036ef3c3ada)
+![image](https://github.com/user-attachments/assets/86292e57-bfa2-4ff1-8fad-0d39d6dc4e63)
 
