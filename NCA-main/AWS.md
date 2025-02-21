@@ -175,3 +175,5 @@ Tabla de subredes
 ![image](https://github.com/user-attachments/assets/a0f25983-6bb1-44e9-af78-c036ef3c3ada)
 ![image](https://github.com/user-attachments/assets/86292e57-bfa2-4ff1-8fad-0d39d6dc4e63)
 
+
+
