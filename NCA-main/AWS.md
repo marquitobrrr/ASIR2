@@ -81,3 +81,46 @@ AWS es el líder en el mercado de la nube gracias a su innovación constante, su
 ![image](https://github.com/user-attachments/assets/265e1490-7a3b-45c2-b38e-f48e415b5f68)
 
 
+## CONFIGURACION DE SERVICIOS
+### Despliegue de vpc y subredes
+#### VPC
+![image](https://github.com/user-attachments/assets/896b1314-852e-4512-b56c-a77cd873cbc1)
+#### SUBREDES
+Subred 1 publica
+![image](https://github.com/user-attachments/assets/40ab4d71-f56d-426a-8313-02cae9f7a650)
+Subred 2 privada para la base de datos
+![image](https://github.com/user-attachments/assets/fb9adba7-1c4f-458c-98de-0f5df16bef61)
+Subred 3 privada replica de la base de datos
+![image](https://github.com/user-attachments/assets/a285c78a-5f01-401f-8beb-c9f97512dc92
+
+Tabla de subredes
+![image](https://github.com/user-attachments/assets/b9bde86a-31b6-45f8-a4fa-f77ac5a208cd)
+
+### Despliegue de instancias
+#### Instancia WebServer
+![image](https://github.com/user-attachments/assets/8e7c2141-96cd-4d6d-937c-55b3d0d82f7c)
+![image](https://github.com/user-attachments/assets/981c7180-155a-4cd3-865b-f25a60c27269)
+![image](https://github.com/user-attachments/assets/ee747101-47fa-4059-b84f-9bbd40ae65d0)
+![image](https://github.com/user-attachments/assets/e0327809-a20d-4110-a36f-6805665286d0)
+![image](https://github.com/user-attachments/assets/9fe4848b-bf41-4e1b-90a6-c958cda636a4)
+
+#### Gateway
+![image](https://github.com/user-attachments/assets/3b951766-114b-4549-b479-b593f9a2d174)
+
+#### Tablas de enrutamiento
+![image](https://github.com/user-attachments/assets/70d58a28-f844-4e49-97fd-e886e1b77222)
+![image](https://github.com/user-attachments/assets/e18dc415-8c8c-4cad-a41e-1000cadd9fde)
+
+#### Conexion SSH 
+![image](https://github.com/user-attachments/assets/134b34bd-4307-45f7-8364-549922e58773)
+![image](https://github.com/user-attachments/assets/0c4c7976-7f56-4bef-91aa-9bd7295aea74)
+
+##### Ejecutar el script
+![image](https://github.com/user-attachments/assets/02787706-b2d9-4bab-be91-33e4b30fe448)
+![image](https://github.com/user-attachments/assets/1650693b-4718-411c-a7c5-58c4c587a6eb)
+![image](https://github.com/user-attachments/assets/23e8f91b-adb0-45d7-9572-0812c7fe3878)
+
+#### Conexion HTTP
+![image](https://github.com/user-attachments/assets/1ab4811f-bc51-43df-b7ab-8af07d571db0)
+
+### Creacion Base de datos
