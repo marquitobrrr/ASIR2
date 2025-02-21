@@ -80,6 +80,7 @@ AWS es el líder en el mercado de la nube gracias a su innovación constante, su
 ![image](https://github.com/user-attachments/assets/ae62f100-f4c2-46c7-ae5a-8b4dd9fb94d5)
 ![image](https://github.com/user-attachments/assets/265e1490-7a3b-45c2-b38e-f48e415b5f68)
 
+---
 
 ## CONFIGURACION DE SERVICIOS
 ### Despliegue de vpc y subredes
@@ -123,4 +124,16 @@ Tabla de subredes
 #### Conexion HTTP
 ![image](https://github.com/user-attachments/assets/1ab4811f-bc51-43df-b7ab-8af07d571db0)
 
+---
+
 ### Creacion Base de datos
+#### Grupo de subredes
+![image](https://github.com/user-attachments/assets/37a9851f-33fe-4c7b-9b5a-a1e81c5c94ee)
+![image](https://github.com/user-attachments/assets/02e40a2f-df8e-4969-a9c8-c71f5f852fa7)
+![image](https://github.com/user-attachments/assets/8be244ec-e85d-4ade-894a-caa2c3314d6f)
+0.
+
+#### Creacion bae de datos
+![image](https://github.com/user-attachments/assets/e0f16afb-2cbb-4a1f-a089-59038c2aeb40)
+
+
