@@ -135,5 +135,14 @@ Tabla de subredes
 
 #### Creacion bae de datos
 ![image](https://github.com/user-attachments/assets/e0f16afb-2cbb-4a1f-a089-59038c2aeb40)
+![image](https://github.com/user-attachments/assets/e0a24fc9-fbfb-4d26-a349-f49c3b76f0cb)
+![image](https://github.com/user-attachments/assets/551d7a5a-1086-484a-88be-2651bdd6183a)
+![image](https://github.com/user-attachments/assets/4949a564-b22a-48ea-a33e-cec2aedb8d9c)
+![image](https://github.com/user-attachments/assets/0695d095-2c88-4d2e-904a-21a2d654f354)
 
+#### Desde terminal ejecutar este comando 
+```bash
+  mysql -u -admin -h database-marcoasir.cj8masiai201.eu-west-3.rds.amazonaws.com -p
+  sudo yum install mysql
+```
 
