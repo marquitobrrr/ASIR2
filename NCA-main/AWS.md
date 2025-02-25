@@ -175,5 +175,16 @@ Tabla de subredes
 ![image](https://github.com/user-attachments/assets/a0f25983-6bb1-44e9-af78-c036ef3c3ada)
 ![image](https://github.com/user-attachments/assets/86292e57-bfa2-4ff1-8fad-0d39d6dc4e63)
 
+### DMZ
+#### Subred DMZ y Firewall de al subred
+Subred DMZ
+![image](https://github.com/user-attachments/assets/4e5c733e-0efe-4e91-9541-79954ce21251)
+Firewall subred
+![image](https://github.com/user-attachments/assets/d16c4bb9-9c27-4d33-8e33-60054786b396)
 
+#### Instancia Firewall
+![image](https://github.com/user-attachments/assets/0f81178f-de3c-42ac-9a40-a70ed14a4908)
+
+#### IP elastica
+![image](https://github.com/user-attachments/assets/74cefd30-4afd-4fe9-a2f4-2e1655fd228f)
 
