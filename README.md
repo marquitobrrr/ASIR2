@@ -18,7 +18,7 @@ Explora los diferentes módulos de este repositorio. Haz clic en el título para
 
 | Carpeta | Descripción | Stack Principal |
 | :--- | :--- | :--- |
-| [📁 Administración de sistemas gestores de bases de datos](./frontend) | Configuración, ajuste de rendimiento, backups y gestión de usuarios en SGBD. | `MySQL` `Cassandra` `PostgreSQL` `REDIS` `MongoDB` |
+| [📁 Administración de sistemas gestores de bases de datos](./ASGBD-main) | Configuración, ajuste de rendimiento, backups y gestión de usuarios en SGBD. | `MySQL` `Cassandra` `PostgreSQL` `REDIS` `MongoDB` |
 | [📁 Implementación de aplicaciones web](./backend) | Despliegue de aplicaciones en servidores, gestión de CMS y entornos de producción. | `HTML` `PHP` `JS` `CSS` | 
 | [📁 Proyectos NCA](./docs) | Desarrollo basado en el modelo "Nuevo Contexto de Aprendizaje", enfocado en retos reales. | `AWS` |
 | [📁 Seguridad](./scripts) |Auditoría, criptografía, bastionado de sistemas y protocolos de red seguros. | `Pydictor` `Dymerge` `Hydra` `DVWA` `pfSense` `Cuckoo` |
